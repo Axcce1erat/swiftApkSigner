@@ -1,0 +1,358 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 52;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		65EDFB7A25E3CFC4006D10D5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EDFB7925E3CFC4006D10D5 /* main.swift */; };
+		65EDFB8325E3D008006D10D5 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 65EDFB8225E3D008006D10D5 /* ArgumentParser */; };
+		65EDFB8725E3DDDC006D10D5 /* SwiftShell in Frameworks */ = {isa = PBXBuildFile; productRef = 65EDFB8625E3DDDC006D10D5 /* SwiftShell */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		65EDFB7425E3CFC4006D10D5 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		657569E625E5179E00C27FAA /* apkSignerDtagXcode.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = apkSignerDtagXcode.sh; sourceTree = "<group>"; };
+		657569E925E5233E00C27FAA /* test.keystore */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.keystore; sourceTree = "<group>"; };
+		657569EA25E5233E00C27FAA /* pass.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = pass.txt; sourceTree = "<group>"; };
+		657569EB25E5234800C27FAA /* release_unsigned.apk */ = {isa = PBXFileReference; lastKnownFileType = file; path = release_unsigned.apk; sourceTree = "<group>"; };
+		65EDFB7625E3CFC4006D10D5 /* swiftApkSigner */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = swiftApkSigner; sourceTree = BUILT_PRODUCTS_DIR; };
+		65EDFB7925E3CFC4006D10D5 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		65EDFB7325E3CFC4006D10D5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				65EDFB8325E3D008006D10D5 /* ArgumentParser in Frameworks */,
+				65EDFB8725E3DDDC006D10D5 /* SwiftShell in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		657569E725E522B400C27FAA /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				657569E625E5179E00C27FAA /* apkSignerDtagXcode.sh */,
+				657569EB25E5234800C27FAA /* release_unsigned.apk */,
+				657569E825E5233E00C27FAA /* keystore */,
+			);
+			path = assets;
+			sourceTree = "<group>";
+		};
+		657569E825E5233E00C27FAA /* keystore */ = {
+			isa = PBXGroup;
+			children = (
+				657569E925E5233E00C27FAA /* test.keystore */,
+				657569EA25E5233E00C27FAA /* pass.txt */,
+			);
+			path = keystore;
+			sourceTree = "<group>";
+		};
+		65EDFB6D25E3CFC4006D10D5 = {
+			isa = PBXGroup;
+			children = (
+				65EDFB7825E3CFC4006D10D5 /* swiftApkSigner */,
+				65EDFB7725E3CFC4006D10D5 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		65EDFB7725E3CFC4006D10D5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				65EDFB7625E3CFC4006D10D5 /* swiftApkSigner */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		65EDFB7825E3CFC4006D10D5 /* swiftApkSigner */ = {
+			isa = PBXGroup;
+			children = (
+				65EDFB7925E3CFC4006D10D5 /* main.swift */,
+				657569E725E522B400C27FAA /* assets */,
+			);
+			path = swiftApkSigner;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		65EDFB7525E3CFC4006D10D5 /* swiftApkSigner */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 65EDFB7D25E3CFC4006D10D5 /* Build configuration list for PBXNativeTarget "swiftApkSigner" */;
+			buildPhases = (
+				65EDFB7225E3CFC4006D10D5 /* Sources */,
+				65EDFB7325E3CFC4006D10D5 /* Frameworks */,
+				65EDFB7425E3CFC4006D10D5 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = swiftApkSigner;
+			packageProductDependencies = (
+				65EDFB8225E3D008006D10D5 /* ArgumentParser */,
+				65EDFB8625E3DDDC006D10D5 /* SwiftShell */,
+			);
+			productName = swiftApkSigner;
+			productReference = 65EDFB7625E3CFC4006D10D5 /* swiftApkSigner */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		65EDFB6E25E3CFC4006D10D5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1240;
+				LastUpgradeCheck = 1240;
+				TargetAttributes = {
+					65EDFB7525E3CFC4006D10D5 = {
+						CreatedOnToolsVersion = 12.4;
+					};
+				};
+			};
+			buildConfigurationList = 65EDFB7125E3CFC4006D10D5 /* Build configuration list for PBXProject "swiftApkSigner" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 65EDFB6D25E3CFC4006D10D5;
+			packageReferences = (
+				65EDFB8125E3D008006D10D5 /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
+				65EDFB8525E3DDDC006D10D5 /* XCRemoteSwiftPackageReference "SwiftShell" */,
+			);
+			productRefGroup = 65EDFB7725E3CFC4006D10D5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				65EDFB7525E3CFC4006D10D5 /* swiftApkSigner */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		65EDFB7225E3CFC4006D10D5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				65EDFB7A25E3CFC4006D10D5 /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		65EDFB7B25E3CFC4006D10D5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		65EDFB7C25E3CFC4006D10D5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		65EDFB7E25E3CFC4006D10D5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VZVFUQTSQC;
+				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		65EDFB7F25E3CFC4006D10D5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VZVFUQTSQC;
+				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		65EDFB7125E3CFC4006D10D5 /* Build configuration list for PBXProject "swiftApkSigner" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				65EDFB7B25E3CFC4006D10D5 /* Debug */,
+				65EDFB7C25E3CFC4006D10D5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		65EDFB7D25E3CFC4006D10D5 /* Build configuration list for PBXNativeTarget "swiftApkSigner" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				65EDFB7E25E3CFC4006D10D5 /* Debug */,
+				65EDFB7F25E3CFC4006D10D5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		65EDFB8125E3D008006D10D5 /* XCRemoteSwiftPackageReference "swift-argument-parser" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-argument-parser";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.3.2;
+			};
+		};
+		65EDFB8525E3DDDC006D10D5 /* XCRemoteSwiftPackageReference "SwiftShell" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kareman/SwiftShell.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		65EDFB8225E3D008006D10D5 /* ArgumentParser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 65EDFB8125E3D008006D10D5 /* XCRemoteSwiftPackageReference "swift-argument-parser" */;
+			productName = ArgumentParser;
+		};
+		65EDFB8625E3DDDC006D10D5 /* SwiftShell */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 65EDFB8525E3DDDC006D10D5 /* XCRemoteSwiftPackageReference "SwiftShell" */;
+			productName = SwiftShell;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 65EDFB6E25E3CFC4006D10D5 /* Project object */;
+}
