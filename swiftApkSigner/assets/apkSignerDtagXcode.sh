@@ -1,11 +1,6 @@
 #!/bin/zsh
 #Axel Schwarz, Deutsche Telekom AG, IHUP, ver. 1.1
 
-#export ANDROID_SDK=/Users/axelschwarz/Library/Android/sdk
-#export PATH=$PATH:~/.android-sdk-macosx/platform-tools/
-#export PATH=/Users/axelschwarz/Library/Android/sdk/build-tools/30.0.3:$PATH
-#export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-
 source ~/.zshrc
 
 # Definition of subfolder for signing assets
@@ -130,6 +125,6 @@ echo -e
 echo "----------------all_Done--------------------"
 
 #clean up
-rm $nameApkAligned
-rm $nameApkAlignedSigned
-rm apk_parameter.txt
+#rm $nameApkAligned
+#rm $nameApkAlignedSigned
+#rm apk_parameter.txt
