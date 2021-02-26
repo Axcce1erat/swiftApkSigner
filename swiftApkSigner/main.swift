@@ -17,7 +17,6 @@ if CommandLine.argc < 1 {
    fileFinderCurrent.searchInDir()
 }
 
-
 let urlStartScript = URL(fileURLWithPath: "/Users/axelschwarz/development/swiftApkSigner/swiftApkSigner/assets/readingAndroidManifest.sh")
 let stringStartScript = "\(urlStartScript.path)"
 
@@ -25,6 +24,21 @@ var startApk = "release_unsigned.apk"
 
 let appt = run(stringStartScript, startApk).stdout
 print(appt)
+
+
+let str = "Super long string here"
+let filename = getDocumentsDirectory().appendingPathComponent("PackageNameConfig.txt")
+
+do {
+    try str.write(to: filename, atomically: true, encoding: String.Encoding.utf8)
+} catch {
+    // failed to write file – bad permissions, bad filename, missing permissions, or more likely it can't be converted to the encoding
+}
+
+func getDocumentsDirectory() -> URL {
+    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    return paths[0]
+}
 
 /*
 let urlScript = URL(fileURLWithPath: "/Users/axelschwarz/development/swiftApkSigner/swiftApkSigner/assets/apkSignerDtagXcode.sh")
