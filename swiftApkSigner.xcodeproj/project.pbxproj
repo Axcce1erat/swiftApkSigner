@@ -35,7 +35,6 @@
 		656D052625E93827006FF8B3 /* PackageNameConfig.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = PackageNameConfig.txt; sourceTree = "<group>"; };
 		6571F17225E7EF3B001DC758 /* readingAndroidManifest.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = readingAndroidManifest.sh; sourceTree = "<group>"; };
 		657569E625E5179E00C27FAA /* apkSignerDtagXcode.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = apkSignerDtagXcode.sh; sourceTree = "<group>"; };
-		657569EB25E5234800C27FAA /* release_unsigned.apk */ = {isa = PBXFileReference; lastKnownFileType = file; path = release_unsigned.apk; sourceTree = "<group>"; };
 		65EDFB7625E3CFC4006D10D5 /* swiftApkSigner */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = swiftApkSigner; sourceTree = BUILT_PRODUCTS_DIR; };
 		65EDFB7925E3CFC4006D10D5 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -58,7 +57,6 @@
 				656D052625E93827006FF8B3 /* PackageNameConfig.txt */,
 				6571F17225E7EF3B001DC758 /* readingAndroidManifest.sh */,
 				657569E625E5179E00C27FAA /* apkSignerDtagXcode.sh */,
-				657569EB25E5234800C27FAA /* release_unsigned.apk */,
 			);
 			path = assets;
 			sourceTree = "<group>";
