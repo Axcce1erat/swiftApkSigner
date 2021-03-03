@@ -1,10 +1,7 @@
 #!/bin/zsh
-#Axel Schwarz, Deutsche Telekom AG, IHUP, ver. 1.1
+#Axel Schwarz, Deutsche Telekom AG, IHUP, ver. 1.0
 
 source ~/.zshrc
-
-# Definition of subfolder for signing assets
-sigPath="./keystore/"
 
 nameKeystore=$1
 passFile=$2
@@ -25,14 +22,14 @@ if [ $# -eq $sumStartVar ]
   		exit
 fi
 ##check if start files are present
-if [ -e "$sigPath"$nameKeystore ]
+if [ -e $nameKeystore ]
 	then
   		echo -e "> keystore $1 found.\n"
 	else
   		echo -e "keystore $1 not found!\n"
   		exit
 fi
-if [ -e "$sigPath"$passFile ]
+if [ -e $passFile ]
 	then
   		echo -e "> keystore password $2 found.\n"
 	else
@@ -89,7 +86,7 @@ baseNameApkAligned="$(basename "$nameApkAligned" | sed 's/\(.*\)\..*/\1/')"
 echo "> apksigner_start"
 echo -e
 
-apksigner sign -v --out $baseNameApkAligned"_signed.apk" --ks "$sigPath"$nameKeystore --ks-pass file:"$sigPath"$passFile --v1-signing-enabled $v1 --v2-signing-enabled $v2 --v3-signing-enabled $v3 --v4-signing-enabled $v4 $nameApkAligned
+apksigner sign -v --out $baseNameApkAligned"_signed.apk" --ks $nameKeystore --ks-pass file:$passFile --v1-signing-enabled $v1 --v2-signing-enabled $v2 --v3-signing-enabled $v3 --v4-signing-enabled $v4 $nameApkAligned
 
 if [ $? -eq 0 ]
 	then
@@ -118,13 +115,13 @@ echo -e
 aapt dump badging $nameApkAlignedSigned | grep 'package\|sdkVersion\|targetSdkVersion\|uses-implied-permission: name='android.permission.READ_EXTERNAL_STORAGE'\|feature-group\|uses-gl-es\|uses-feature-not-required\|uses-feature\|uses-implied-feature' | sed 's/\(^.*\) compileSdkVersionCodename.*/\1/'
 
 #In text datei apk_parameter.txt
-aapt dump badging $nameApkAlignedSigned | grep 'package\|sdkVersion\|targetSdkVersion' | sed 's/\(^.*\) compileSdkVersionCodename.*/\1/' > apk_parameter.txt
+#aapt dump badging $nameApkAlignedSigned | grep 'package\|sdkVersion\|targetSdkVersion' | sed 's/\(^.*\) compileSdkVersionCodename.*/\1/' > apk_parameter.txt
 
 echo "--------------------------details_adroid_manifest_end------------------------------"
 echo -e
 echo "----------------all_Done--------------------"
 
 #clean up
-#rm $nameApkAligned
-#rm $nameApkAlignedSigned
+rm $nameApkAligned
+rm $nameApkAlignedSigned
 #rm apk_parameter.txt

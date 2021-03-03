@@ -10,10 +10,10 @@ if CommandLine.argc < 1 {
     let consoleIO = ConsoleIO()
     consoleIO.printUsage()
 } else {
-   let fileFinder = FileFinder()
+   //let fileFinder = FileFinder()
    //let apkName = CommandLine.arguments[1]
-   let argument = "keystore"
-   fileFinder.searchInSubDir(subDir: argument)
+   //let argument = "keystore"
+   //fileFinder.searchInSubDir(subDir: argument)
    let fileFinderCurrent = FileFinderCurrent()
    fileFinderCurrent.searchInDir()
 }
@@ -22,33 +22,37 @@ if CommandLine.argc < 1 {
 let urlStartScript = URL(fileURLWithPath: "/Users/axelschwarz/development/swiftApkSigner/swiftApkSigner/assets/readingAndroidManifest.sh")
 let stringStartScript = "\(urlStartScript.path)"
 
-var startApk = "release_unsigned.apk"
+var startApk = "AppStarter_T30-12.0.0-001-build_4616-Debug-aligned-signed.apk"
 
 let appt = run(stringStartScript, startApk).stdout
 print(appt)
 
-// writing to text file
-let filename = getDesktopDirectory().appendingPathComponent("PackageNameConfig.txt")
+// writing to text file androidManifest filtered output
+
+func getScriptDirectory() -> URL {
+    //let paths = FileManager.default.urls(for: .desktopDirectory, in: .userDomainMask)
+    let paths = URL(fileURLWithPath: "/Users/axelschwarz/Library/Developer/Xcode/DerivedData/swiftApkSigner-gqryovkkaznkrogfwnjulbdgxrqq/Build/Products/Debug")
+    return paths
+}
+
+let packageNameConfig = getScriptDirectory().appendingPathComponent("PackageNameConfig.txt")
 
 do {
-    try appt.write(to: filename, atomically: true, encoding: String.Encoding.utf8)
+    try appt.write(to: packageNameConfig, atomically: true, encoding: String.Encoding.utf8)
 } catch {
-    // failed to write file – bad permissions, bad filename, missing permissions, or more likely it can't be converted to the encoding
+    print ("failed to write file – bad permissions, bad filename, missing permissions, or more likely it can't be converted to the encoding")
 }
+
 /*
 func getCurrentDirectory (){
     let fileManager = FileManager.default
     
     // Get path where the script is
     let currentDirectory = fileManager.currentDirectoryPath
- */
-func getDesktopDirectory() -> URL {
-    let paths = FileManager.default.urls(for: .desktopDirectory, in: .userDomainMask)
-    return paths[0]
 }
+ */
 
-/*
- 
+
 // getting data from singing script
 let urlScript = URL(fileURLWithPath: "/Users/axelschwarz/development/swiftApkSigner/swiftApkSigner/assets/apkSignerDtagXcode.sh")
 let stringScript = "\(urlScript.path)"
@@ -56,8 +60,20 @@ let stringScript = "\(urlScript.path)"
 let keystore = "test.keystore"
 let pass = "pass.txt"
 let valueSigningScheme = "2"
-let apk = "release_unsigned.apk"
+let apk = "AppStarter_T30-12.0.0-001-build_4616-Debug-aligned-signed.apk"
 
 // printing script output
-try runAndPrint(stringScript, keystore, pass, valueSigningScheme, apk)
-*/
+//try runAndPrint(stringScript, keystore, pass, valueSigningScheme, apk)
+
+let apkSignerDtagXcode = run(stringScript, keystore,  pass, valueSigningScheme, apk).stdout
+print(apkSignerDtagXcode)
+
+//
+let apkParameter = getScriptDirectory().appendingPathComponent("apk_parameter.txt")
+
+do {
+    try apkSignerDtagXcode.write(to: apkParameter, atomically: true, encoding: String.Encoding.utf8)
+} catch {
+    // failed to write file – bad permissions, bad filename, missing permissions, or more likely it can't be converted to the encoding
+}
+
