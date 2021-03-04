@@ -18,7 +18,7 @@ if CommandLine.argc < 1 {
    fileFinderCurrent.searchInDir()
 }
 
-// getting data fromm Android Manifest
+// getting data fromm Android Manifest in one string
 let urlStartScript = URL(fileURLWithPath: "/Users/axelschwarz/development/swiftApkSigner/swiftApkSigner/assets/readingAndroidManifest.sh")
 let stringStartScript = "\(urlStartScript.path)"
 
@@ -27,8 +27,76 @@ var startApk = "AppStarter_T30-12.0.0-001-build_4616-Debug-aligned-signed.apk"
 let appt = run(stringStartScript, startApk).stdout
 print(appt)
 
-// writing to text file androidManifest filtered output
+let pattern = #"'(.*?)\'"#
+let regex = try! NSRegularExpression(pattern: pattern)
+let testString = appt
+let stringRange = NSRange(location: 0, length: testString.utf16.count)
+let matches = regex.matches(in: testString, range: stringRange)
+var results: [[String]] = []
+for match in matches {
+    var groups: [String] = []
+    for rangeIndex in 1 ..< match.numberOfRanges {
+        groups.append((testString as NSString).substring(with: match.range(at: rangeIndex)))
+    }
+    if !groups.isEmpty {
+        results.append(groups)
+    }
+}
+print(results)
 
+let patternDebug = #"\W*(application-debuggable)\W*"#
+let regexDebug = try! NSRegularExpression(pattern: patternDebug)
+let testStringDebug = appt
+let stringRangeDebug = NSRange(location: 0, length: testStringDebug.utf16.count)
+let matchesDebug = regexDebug.matches(in: testString, range: stringRange)
+var resultDebug: [[String]] = []
+for match in matchesDebug {
+    var groups: [String] = []
+    for rangeIndex in 1 ..< match.numberOfRanges {
+        groups.append((testStringDebug as NSString).substring(with: match.range(at: rangeIndex)))
+    }
+    if !groups.isEmpty {
+        resultDebug.append(groups)
+    }
+}
+print(resultDebug)
+
+let name = results[0].reduce("", +)
+print(name)
+let versionCode = results[1].reduce("", +)
+print(versionCode)
+let versionName = results[2].reduce("", +)
+print(versionName)
+let compileSdkVersion = results[3].reduce("", +)
+print(compileSdkVersion)
+let compileSdkVersionCodename = results[4].reduce("", +)
+print(compileSdkVersionCodename)
+let debug = resultDebug[0].reduce("", +)
+print(debug)
+
+/*
+let sepparated = appt.components(separatedBy: CharacterSet(charactersIn: " ='"))
+//let sepparatedNextLine = appt.components(separatedBy: CharacterSet(charactersIn: "\n"))
+let keys = sepparated.enumerated().filter{$0.0 % 4 == 3}
+let debugKey = sepparated.enumerated().filter{$0.0 % 21 == 20}
+print (keys)
+print (debugKey)
+
+let name = keys[0]
+print(name)
+let versionCode = keys[1]
+print(versionCode)
+let versionName = keys[2]
+print(versionName)
+let compileSdkVersion = keys[3]
+print(compileSdkVersion)
+let compileSdkVersionCodename = keys[4]
+print(compileSdkVersionCodename)
+let debug = debugKey[0]
+print(debug)
+ */
+
+// writing to text file androidManifest filtered output
 func getScriptDirectory() -> URL {
     //let paths = FileManager.default.urls(for: .desktopDirectory, in: .userDomainMask)
     let paths = URL(fileURLWithPath: "/Users/axelschwarz/Library/Developer/Xcode/DerivedData/swiftApkSigner-gqryovkkaznkrogfwnjulbdgxrqq/Build/Products/Debug")
