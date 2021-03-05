@@ -27,51 +27,38 @@ var startApk = "AppStarter_T30-12.0.0-001-build_4616-Debug-aligned-signed.apk"
 let appt = run(stringStartScript, startApk).stdout
 print(appt)
 
-let pattern = #"'(.*?)\'"#
+let pattern = #"'(.*?)\'|W*(application-debuggable)\W*"#
 let regex = try! NSRegularExpression(pattern: pattern)
 let testString = appt
 let stringRange = NSRange(location: 0, length: testString.utf16.count)
 let matches = regex.matches(in: testString, range: stringRange)
-var results: [[String]] = []
+var result: [[String]] = []
 for match in matches {
-    var groups: [String] = []
-    for rangeIndex in 1 ..< match.numberOfRanges {
-        groups.append((testString as NSString).substring(with: match.range(at: rangeIndex)))
+  var groups: [String] = []
+  for rangeIndex in 1 ..< match.numberOfRanges {
+    let range: NSRange = match.range(at: rangeIndex)
+    guard range.location != NSNotFound, range.length != 0 else {
+        continue
     }
-    if !groups.isEmpty {
-        results.append(groups)
-    }
+    groups.append((testString as NSString).substring(with: match.range(at: rangeIndex)))
+  }
+  if !groups.isEmpty {
+    result.append(groups)
+  }
 }
-print(results)
+print(result)
 
-let patternDebug = #"\W*(application-debuggable)\W*"#
-let regexDebug = try! NSRegularExpression(pattern: patternDebug)
-let testStringDebug = appt
-let stringRangeDebug = NSRange(location: 0, length: testStringDebug.utf16.count)
-let matchesDebug = regexDebug.matches(in: testString, range: stringRange)
-var resultDebug: [[String]] = []
-for match in matchesDebug {
-    var groups: [String] = []
-    for rangeIndex in 1 ..< match.numberOfRanges {
-        groups.append((testStringDebug as NSString).substring(with: match.range(at: rangeIndex)))
-    }
-    if !groups.isEmpty {
-        resultDebug.append(groups)
-    }
-}
-print(resultDebug)
-
-let name = results[0].reduce("", +)
+let name = result[0].reduce("", +)
 print(name)
-let versionCode = results[1].reduce("", +)
+let versionCode = result[1].reduce("", +)
 print(versionCode)
-let versionName = results[2].reduce("", +)
+let versionName = result[2].reduce("", +)
 print(versionName)
-let compileSdkVersion = results[3].reduce("", +)
+let compileSdkVersion = result[3].reduce("", +)
 print(compileSdkVersion)
-let compileSdkVersionCodename = results[4].reduce("", +)
+let compileSdkVersionCodename = result[4].reduce("", +)
 print(compileSdkVersionCodename)
-let debug = resultDebug[0].reduce("", +)
+let debug = result[5].reduce("", +)
 print(debug)
 
 /*
@@ -94,7 +81,7 @@ let compileSdkVersionCodename = keys[4]
 print(compileSdkVersionCodename)
 let debug = debugKey[0]
 print(debug)
- */
+*/
 
 // writing to text file androidManifest filtered output
 func getScriptDirectory() -> URL {
