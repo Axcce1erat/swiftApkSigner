@@ -122,6 +122,6 @@ echo -e
 echo "----------------all_Done--------------------"
 
 #clean up
-rm $nameApkAligned
-rm $nameApkAlignedSigned
+#rm $nameApkAligned
+#rm $nameApkAlignedSigned
 #rm apk_parameter.txt

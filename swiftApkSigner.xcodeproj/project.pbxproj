@@ -14,6 +14,7 @@
 		656D052325E91DA8006FF8B3 /* FileFinderCurrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656D052225E91DA8006FF8B3 /* FileFinderCurrent.swift */; };
 		65EDFB7A25E3CFC4006D10D5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EDFB7925E3CFC4006D10D5 /* main.swift */; };
 		65EDFB8725E3DDDC006D10D5 /* SwiftShell in Frameworks */ = {isa = PBXBuildFile; productRef = 65EDFB8625E3DDDC006D10D5 /* SwiftShell */; };
+		65FFA5CA25F282F600415F0D /* DebugOrRelease.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FFA5C925F282F600415F0D /* DebugOrRelease.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -42,6 +43,7 @@
 		657569E625E5179E00C27FAA /* apkSignerDtagXcode.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = apkSignerDtagXcode.sh; sourceTree = "<group>"; };
 		65EDFB7625E3CFC4006D10D5 /* swiftApkSigner */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = swiftApkSigner; sourceTree = BUILT_PRODUCTS_DIR; };
 		65EDFB7925E3CFC4006D10D5 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		65FFA5C925F282F600415F0D /* DebugOrRelease.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugOrRelease.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				65EDFB7925E3CFC4006D10D5 /* main.swift */,
+				65FFA5C925F282F600415F0D /* DebugOrRelease.swift */,
 				656D051425E91164006FF8B3 /* FileFinder.swift */,
 				656D052225E91DA8006FF8B3 /* FileFinderCurrent.swift */,
 				656D051725E9116F006FF8B3 /* ConsoleIO.swift */,
@@ -258,6 +261,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65FFA5CA25F282F600415F0D /* DebugOrRelease.swift in Sources */,
 				656D051825E9116F006FF8B3 /* ConsoleIO.swift in Sources */,
 				656D051F25E9129F006FF8B3 /* SingApk.swift in Sources */,
 				656D052325E91DA8006FF8B3 /* FileFinderCurrent.swift in Sources */,

@@ -22,7 +22,7 @@ if CommandLine.argc < 1 {
 let urlStartScript = URL(fileURLWithPath: "/Users/axelschwarz/development/swiftApkSigner/swiftApkSigner/assets/readingAndroidManifest.sh")
 let stringStartScript = "\(urlStartScript.path)"
 
-var startApk = "AppStarter_T30-12.0.0-001-build_4616-Debug-aligned-signed.apk"
+var startApk = "in_debug.apk"
 
 let appt = run(stringStartScript, startApk).stdout
 print(appt)
@@ -60,6 +60,35 @@ let compileSdkVersionCodename = result[4].reduce("", +)
 print(compileSdkVersionCodename)
 let debug = result[5].reduce("", +)
 print(debug)
+
+func debugRelease(debugOption: String) -> String {
+    if (debugOption == "application-debuggable"){
+        let debugOption = "debug"
+        return debugOption
+    }
+    else{
+        let release = "release"
+        return release
+    }
+}
+
+//let debugOption = DebugOrRelease()
+let debugOption = debugRelease(debugOption: debug)
+
+//concatenate strings for apk name
+let apkName = "\(name)_\(versionName)_\(versionCode)_\(debugOption).apk"
+print("End APK name is: ",apkName)
+
+// rename apk file inScript
+let apk = "in_debug.apk"
+let fileManager = FileManager.default
+
+do {
+    try fileManager.moveItem(atPath: apk, toPath: apkName)
+}
+catch let error as NSError {
+    print("Ooops! Something went wrong with renaming the apk file for the script: \(error)")
+}
 
 /*
 let sepparated = appt.components(separatedBy: CharacterSet(charactersIn: " ='"))
@@ -115,15 +144,14 @@ let stringScript = "\(urlScript.path)"
 let keystore = "test.keystore"
 let pass = "pass.txt"
 let valueSigningScheme = "2"
-let apk = "AppStarter_T30-12.0.0-001-build_4616-Debug-aligned-signed.apk"
 
 // printing script output
 //try runAndPrint(stringScript, keystore, pass, valueSigningScheme, apk)
 
-let apkSignerDtagXcode = run(stringScript, keystore,  pass, valueSigningScheme, apk).stdout
+let apkSignerDtagXcode = run(stringScript, keystore,  pass, valueSigningScheme, apkName).stdout
 print(apkSignerDtagXcode)
 
-//
+
 let apkParameter = getScriptDirectory().appendingPathComponent("apk_parameter.txt")
 
 do {
