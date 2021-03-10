@@ -41,6 +41,8 @@
 		656D052625E93827006FF8B3 /* PackageNameConfig.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = PackageNameConfig.txt; sourceTree = "<group>"; };
 		6571F17225E7EF3B001DC758 /* readingAndroidManifest.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = readingAndroidManifest.sh; sourceTree = "<group>"; };
 		657569E625E5179E00C27FAA /* apkSignerDtagXcode.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = apkSignerDtagXcode.sh; sourceTree = "<group>"; };
+		65A794AA25F7D4C1002A1B36 /* apkConfig.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = apkConfig.xml; sourceTree = "<group>"; };
+		65A794AB25F7D51B002A1B36 /* singConfig.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = singConfig.plist; sourceTree = "<group>"; };
 		65EDFB7625E3CFC4006D10D5 /* swiftApkSigner */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = swiftApkSigner; sourceTree = BUILT_PRODUCTS_DIR; };
 		65EDFB7925E3CFC4006D10D5 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		65FFA5C925F282F600415F0D /* DebugOrRelease.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugOrRelease.swift; sourceTree = "<group>"; };
@@ -114,6 +116,8 @@
 			isa = PBXGroup;
 			children = (
 				65EDFB7925E3CFC4006D10D5 /* main.swift */,
+				65A794AA25F7D4C1002A1B36 /* apkConfig.xml */,
+				65A794AB25F7D51B002A1B36 /* singConfig.plist */,
 				65FFA5C925F282F600415F0D /* DebugOrRelease.swift */,
 				656D051425E91164006FF8B3 /* FileFinder.swift */,
 				656D052225E91DA8006FF8B3 /* FileFinderCurrent.swift */,

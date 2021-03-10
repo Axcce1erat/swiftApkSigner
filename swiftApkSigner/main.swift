@@ -22,7 +22,7 @@ if CommandLine.argc < 1 {
 let urlStartScript = URL(fileURLWithPath: "/Users/axelschwarz/development/swiftApkSigner/swiftApkSigner/assets/readingAndroidManifest.sh")
 let stringStartScript = "\(urlStartScript.path)"
 
-var startApk = "in_debug.apk"
+var startApk = "de.telekom.appstarter_12.0.0-001_120000000_debug.apk"
 
 let appt = run(stringStartScript, startApk).stdout
 print(appt)
@@ -80,7 +80,7 @@ let apkName = "\(name)_\(versionName)_\(versionCode)_\(debugOption).apk"
 print("End APK name is: ",apkName)
 
 // rename apk file inScript
-let apk = "in_debug.apk"
+let apk = "de.telekom.appstarter_12.0.0-001_120000000_debug.apk"
 let fileManager = FileManager.default
 
 do {
@@ -135,7 +135,6 @@ func getCurrentDirectory (){
     let currentDirectory = fileManager.currentDirectoryPath
 }
  */
-
 
 // getting data from singing script
 let urlScript = URL(fileURLWithPath: "/Users/axelschwarz/development/swiftApkSigner/swiftApkSigner/assets/apkSignerDtagXcode.sh")
