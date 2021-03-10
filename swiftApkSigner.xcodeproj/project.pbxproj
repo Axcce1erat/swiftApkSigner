@@ -9,9 +9,9 @@
 /* Begin PBXBuildFile section */
 		655643E425F2414700878AD9 /* swiftApkSignerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655643E325F2414700878AD9 /* swiftApkSignerTest.swift */; };
 		656B24A025F913F800685CB5 /* Preparation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656B249F25F913F800685CB5 /* Preparation.swift */; };
+		656B24A825F92A1400685CB5 /* FileHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656B24A725F92A1400685CB5 /* FileHandler.swift */; };
 		656D051525E91164006FF8B3 /* FileFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656D051425E91164006FF8B3 /* FileFinder.swift */; };
 		656D051825E9116F006FF8B3 /* ConsoleIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656D051725E9116F006FF8B3 /* ConsoleIO.swift */; };
-		656D051F25E9129F006FF8B3 /* SingApk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656D051E25E9129F006FF8B3 /* SingApk.swift */; };
 		656D052325E91DA8006FF8B3 /* FileFinderCurrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656D052225E91DA8006FF8B3 /* FileFinderCurrent.swift */; };
 		65EDFB7A25E3CFC4006D10D5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EDFB7925E3CFC4006D10D5 /* main.swift */; };
 		65EDFB8725E3DDDC006D10D5 /* SwiftShell in Frameworks */ = {isa = PBXBuildFile; productRef = 65EDFB8625E3DDDC006D10D5 /* SwiftShell */; };
@@ -37,9 +37,9 @@
 		655643E525F2414700878AD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		656B248025F8F33500685CB5 /* singConf.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = singConf.json; sourceTree = "<group>"; };
 		656B249F25F913F800685CB5 /* Preparation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preparation.swift; sourceTree = "<group>"; };
+		656B24A725F92A1400685CB5 /* FileHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHandler.swift; sourceTree = "<group>"; };
 		656D051425E91164006FF8B3 /* FileFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileFinder.swift; sourceTree = "<group>"; };
 		656D051725E9116F006FF8B3 /* ConsoleIO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsoleIO.swift; sourceTree = "<group>"; };
-		656D051E25E9129F006FF8B3 /* SingApk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingApk.swift; sourceTree = "<group>"; };
 		656D052225E91DA8006FF8B3 /* FileFinderCurrent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileFinderCurrent.swift; sourceTree = "<group>"; };
 		656D052625E93827006FF8B3 /* PackageNameConfig.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = PackageNameConfig.txt; sourceTree = "<group>"; };
 		6571F17225E7EF3B001DC758 /* readingAndroidManifest.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = readingAndroidManifest.sh; sourceTree = "<group>"; };
@@ -117,13 +117,13 @@
 			isa = PBXGroup;
 			children = (
 				65EDFB7925E3CFC4006D10D5 /* main.swift */,
+				656B24A725F92A1400685CB5 /* FileHandler.swift */,
 				656B249F25F913F800685CB5 /* Preparation.swift */,
 				656B248025F8F33500685CB5 /* singConf.json */,
 				65FFA5C925F282F600415F0D /* DebugOrRelease.swift */,
 				656D051425E91164006FF8B3 /* FileFinder.swift */,
 				656D052225E91DA8006FF8B3 /* FileFinderCurrent.swift */,
 				656D051725E9116F006FF8B3 /* ConsoleIO.swift */,
-				656D051E25E9129F006FF8B3 /* SingApk.swift */,
 				657569E725E522B400C27FAA /* assets */,
 			);
 			path = swiftApkSigner;
@@ -268,8 +268,8 @@
 			files = (
 				65FFA5CA25F282F600415F0D /* DebugOrRelease.swift in Sources */,
 				656B24A025F913F800685CB5 /* Preparation.swift in Sources */,
+				656B24A825F92A1400685CB5 /* FileHandler.swift in Sources */,
 				656D051825E9116F006FF8B3 /* ConsoleIO.swift in Sources */,
-				656D051F25E9129F006FF8B3 /* SingApk.swift in Sources */,
 				656D052325E91DA8006FF8B3 /* FileFinderCurrent.swift in Sources */,
 				65EDFB7A25E3CFC4006D10D5 /* main.swift in Sources */,
 				656D051525E91164006FF8B3 /* FileFinder.swift in Sources */,

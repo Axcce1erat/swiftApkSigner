@@ -1,7 +1,8 @@
+//  Created by Axel Schwarz
 import Foundation
 import AppKit
 import SwiftShell
-
+/*
 let fileFinderCurrent = FileFinderCurrent()
 let fileFinder = FileFinder()
 
@@ -17,7 +18,7 @@ if CommandLine.argc < 1 {
    let fileFinderCurrent = FileFinderCurrent()
    fileFinderCurrent.searchInDir()
 }
-
+*/
 let appt = Preparation().dataFromAndroidManifest()
 
 let (name, versionCode, versionName, debug) = Preparation().filterWithRegex(appt: appt)
@@ -26,7 +27,6 @@ let debugOption = Preparation().debugRelease(debugOption: debug)
 
 //concatenate strings for apk name
 let apkName = "\(name)_\(versionName)_\(versionCode)_\(debugOption).apk"
-print("End APK name is: ",apkName)
 
 // rename apk file inScript
 let apk = "de.telekom.appstarter_12.0.0-001_120000000_debug.apk"
@@ -40,13 +40,7 @@ catch let error as NSError {
 }
 
 // writing to text file androidManifest filtered output
-func getScriptDirectory() -> URL {
-    //let paths = FileManager.default.urls(for: .desktopDirectory, in: .userDomainMask)
-    let paths = URL(fileURLWithPath: "/Users/axelschwarz/Library/Developer/Xcode/DerivedData/swiftApkSigner-gqryovkkaznkrogfwnjulbdgxrqq/Build/Products/Debug")
-    return paths
-}
-
-let packageNameConfig = getScriptDirectory().appendingPathComponent("PackageNameConfig.txt")
+let packageNameConfig = FileHandler().getScriptDirectory().appendingPathComponent("PackageNameConfig.txt")
 
 do {
     try appt.write(to: packageNameConfig, atomically: true, encoding: String.Encoding.utf8)
@@ -54,31 +48,16 @@ do {
     print ("failed to write file – bad permissions, bad filename, missing permissions, or more likely it can't be converted to the encoding")
 }
 
-/*
-func getCurrentDirectory (){
-    let fileManager = FileManager.default
-    
-    // Get path where the script is
-    let currentDirectory = fileManager.currentDirectoryPath
-}
- */
+let stringScript = FileHandler().dataFromSingingScript()
 
-// getting data from singing script
-let urlScript = URL(fileURLWithPath: "/Users/axelschwarz/development/swiftApkSigner/swiftApkSigner/assets/apkSignerDtagXcode.sh")
-let stringScript = "\(urlScript.path)"
- 
 let keystore = "test.keystore"
 let pass = "pass.txt"
 let valueSigningScheme = "2"
 
-// printing script output
-//try runAndPrint(stringScript, keystore, pass, valueSigningScheme, apk)
-
 let apkSignerDtagXcode = run(stringScript, keystore,  pass, valueSigningScheme, apkName).stdout
 print(apkSignerDtagXcode)
 
-
-let apkParameter = getScriptDirectory().appendingPathComponent("apk_parameter.txt")
+let apkParameter = FileHandler().getScriptDirectory().appendingPathComponent("apk_parameter.txt")
 
 do {
     try apkSignerDtagXcode.write(to: apkParameter, atomically: true, encoding: String.Encoding.utf8)
