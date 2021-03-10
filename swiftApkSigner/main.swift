@@ -18,62 +18,11 @@ if CommandLine.argc < 1 {
    fileFinderCurrent.searchInDir()
 }
 
-// getting data fromm Android Manifest in one string
-let urlStartScript = URL(fileURLWithPath: "/Users/axelschwarz/development/swiftApkSigner/swiftApkSigner/assets/readingAndroidManifest.sh")
-let stringStartScript = "\(urlStartScript.path)"
+let appt = Preparation().dataFromAndroidManifest()
 
-var startApk = "de.telekom.appstarter_12.0.0-001_120000000_debug.apk"
+let (name, versionCode, versionName, debug) = Preparation().filterWithRegex(appt: appt)
 
-let appt = run(stringStartScript, startApk).stdout
-print(appt)
-
-let pattern = #"'(.*?)\'|W*(application-debuggable)\W*"#
-let regex = try! NSRegularExpression(pattern: pattern)
-let testString = appt
-let stringRange = NSRange(location: 0, length: testString.utf16.count)
-let matches = regex.matches(in: testString, range: stringRange)
-var result: [[String]] = []
-for match in matches {
-  var groups: [String] = []
-  for rangeIndex in 1 ..< match.numberOfRanges {
-    let range: NSRange = match.range(at: rangeIndex)
-    guard range.location != NSNotFound, range.length != 0 else {
-        continue
-    }
-    groups.append((testString as NSString).substring(with: match.range(at: rangeIndex)))
-  }
-  if !groups.isEmpty {
-    result.append(groups)
-  }
-}
-print(result)
-
-let name = result[0].reduce("", +)
-print(name)
-let versionCode = result[1].reduce("", +)
-print(versionCode)
-let versionName = result[2].reduce("", +)
-print(versionName)
-let compileSdkVersion = result[3].reduce("", +)
-print(compileSdkVersion)
-let compileSdkVersionCodename = result[4].reduce("", +)
-print(compileSdkVersionCodename)
-let debug = result[5].reduce("", +)
-print(debug)
-
-func debugRelease(debugOption: String) -> String {
-    if (debugOption == "application-debuggable"){
-        let debugOption = "debug"
-        return debugOption
-    }
-    else{
-        let release = "release"
-        return release
-    }
-}
-
-//let debugOption = DebugOrRelease()
-let debugOption = debugRelease(debugOption: debug)
+let debugOption = Preparation().debugRelease(debugOption: debug)
 
 //concatenate strings for apk name
 let apkName = "\(name)_\(versionName)_\(versionCode)_\(debugOption).apk"
@@ -89,28 +38,6 @@ do {
 catch let error as NSError {
     print("Ooops! Something went wrong with renaming the apk file for the script: \(error)")
 }
-
-/*
-let sepparated = appt.components(separatedBy: CharacterSet(charactersIn: " ='"))
-//let sepparatedNextLine = appt.components(separatedBy: CharacterSet(charactersIn: "\n"))
-let keys = sepparated.enumerated().filter{$0.0 % 4 == 3}
-let debugKey = sepparated.enumerated().filter{$0.0 % 21 == 20}
-print (keys)
-print (debugKey)
-
-let name = keys[0]
-print(name)
-let versionCode = keys[1]
-print(versionCode)
-let versionName = keys[2]
-print(versionName)
-let compileSdkVersion = keys[3]
-print(compileSdkVersion)
-let compileSdkVersionCodename = keys[4]
-print(compileSdkVersionCodename)
-let debug = debugKey[0]
-print(debug)
-*/
 
 // writing to text file androidManifest filtered output
 func getScriptDirectory() -> URL {
