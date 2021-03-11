@@ -36,14 +36,14 @@ class Preparation{
           }
         }
         
-        let name = result[0].reduce("", +)
+        let packageName = result[0].reduce("", +)
         let versionCode = result[1].reduce("", +)
         let versionName = result[2].reduce("", +)
         //let compileSdkVersion = result[3].reduce("", +)
         //let compileSdkVersionCodename = result[4].reduce("", +)
         let debug = result[5].reduce("", +)
         
-        return (name, versionCode, versionName, debug)
+        return (packageName, versionCode, versionName, debug)
     }
     
     func debugRelease(debugOption: String) -> String {

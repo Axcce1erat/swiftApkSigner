@@ -21,12 +21,12 @@ if CommandLine.argc < 1 {
 */
 let appt = Preparation().dataFromAndroidManifest()
 
-let (name, versionCode, versionName, debug) = Preparation().filterWithRegex(appt: appt)
+let (packageName, versionCode, versionName, debug) = Preparation().filterWithRegex(appt: appt)
 
 let debugOption = Preparation().debugRelease(debugOption: debug)
 
 //concatenate strings for apk name
-let apkName = "\(name)_\(versionName)_\(versionCode)_\(debugOption).apk"
+let apkName = "\(packageName)_\(versionName)_\(versionCode)_\(debugOption).apk"
 
 // rename apk file inScript
 let apk = "de.telekom.appstarter_12.0.0-001_120000000_debug.apk"
@@ -62,6 +62,54 @@ let apkParameter = FileHandler().getScriptDirectory().appendingPathComponent("ap
 do {
     try apkSignerDtagXcode.write(to: apkParameter, atomically: true, encoding: String.Encoding.utf8)
 } catch {
-    // failed to write file – bad permissions, bad filename, missing permissions, or more likely it can't be converted to the encoding
+    print ("failed to write file – bad permissions, bad filename, missing permissions, or more likely it can't be converted to the encoding")
 }
 
+//json hanling
+FileHandler().writingStartJson(PackageName: packageName)
+
+let jsonString = """
+{
+       "PackageName": "de.telekom.appstarter",
+       "AppName": "appstarter",
+       "AppPath": "User/axelscwharz/Desktop",
+       "KeyStore": "test.keystore",
+       "KeyPass": "pass.txt",
+       "SigningScheme": 2
+}
+"""
+
+struct Config: Codable
+{
+    var PackageName: String
+    var AppName: String
+    var AppPath: String
+    var KeyStore: String
+    var KeyPass: String
+    var SigningScheme: Int
+}
+
+if let jsonData = jsonString.data(using: .utf8)
+{
+    let decoder = JSONDecoder()
+
+    do {
+        let config = try decoder.decode(Config.self, from: jsonData)
+        print(config.AppName)
+        print(config.AppPath)
+        print(config.PackageName)
+        print(config.KeyStore)
+        print(config.KeyPass)
+        print(config.SigningScheme)
+        /*
+        let appName:String = config.AppName
+        let appPath:String = config.AppPath
+        let packageName:String = config.PackageName
+        let keyStore:String = config.KeyStore
+        let keyPass:String = config.KeyPass
+        let signingScheme:Int = config.SigningScheme
+        */
+    } catch {
+        print(error.localizedDescription)
+    }
+}
