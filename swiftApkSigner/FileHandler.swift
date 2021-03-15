@@ -4,6 +4,7 @@ import SwiftShell
 
 class FileHandler{
     
+      
     func getScriptDirectory() -> URL {
         //let paths = FileManager.default.urls(for: .desktopDirectory, in: .userDomainMask)
         let paths = URL(fileURLWithPath: "/Users/axelschwarz/Library/Developer/Xcode/DerivedData/swiftApkSigner-gqryovkkaznkrogfwnjulbdgxrqq/Build/Products/Debug")

@@ -65,51 +65,45 @@ do {
     print ("failed to write file – bad permissions, bad filename, missing permissions, or more likely it can't be converted to the encoding")
 }
 
-//json hanling
-FileHandler().writingStartJson(PackageName: packageName)
+//let jsonFile = FileHandler().getScriptDirectory().appendingPathComponent("")
 
-let jsonString = """
-{
-       "PackageName": "de.telekom.appstarter",
-       "AppName": "appstarter",
-       "AppPath": "User/axelscwharz/Desktop",
-       "KeyStore": "test.keystore",
-       "KeyPass": "pass.txt",
-       "SigningScheme": 2
-}
-"""
-
-struct Config: Codable
-{
-    var PackageName: String
-    var AppName: String
-    var AppPath: String
-    var KeyStore: String
-    var KeyPass: String
-    var SigningScheme: Int
-}
-
-if let jsonData = jsonString.data(using: .utf8)
-{
-    let decoder = JSONDecoder()
-
-    do {
-        let config = try decoder.decode(Config.self, from: jsonData)
-        print(config.AppName)
-        print(config.AppPath)
-        print(config.PackageName)
-        print(config.KeyStore)
-        print(config.KeyPass)
-        print(config.SigningScheme)
-        /*
-        let appName:String = config.AppName
-        let appPath:String = config.AppPath
-        let packageName:String = config.PackageName
-        let keyStore:String = config.KeyStore
-        let keyPass:String = config.KeyPass
-        let signingScheme:Int = config.SigningScheme
-        */
-    } catch {
-        print(error.localizedDescription)
+func checkJson() -> String {
+    let check = FileFinderCurrent().searchInDir()
+    print("var test: ", check)
+    
+    if (check == true){
+        //json hanling writing start json
+        FileHandler().writingStartJson(PackageName: packageName)
+        return nil
     }
+    else if (check == false){
+        let jsonPath = loadJson(fileName: packageName)
+        print("jsonPath=",jsonPath)
+        return jsonPath
+    }
+}
+
+
+let newJsonData = handleJsonData(jsonPath: checkJson())
+
+func loadJson(fileName: String) -> String{
+    
+    let urlJson = URL(fileURLWithPath: "/Users/axelschwarz/Library/Developer/Xcode/DerivedData/swiftApkSigner-gqryovkkaznkrogfwnjulbdgxrqq/Build/Products/Debug/\(packageName)_Config.json")
+    let jsonString = "\(urlJson.path)"
+    return jsonString
+}
+
+func handleJsonData(jsonPath: String) -> (String, String, String, String, String, Int) {
+    struct Config: Codable
+    {
+        var PackageName: String
+        var AppName: String
+        var AppPath: String
+        var KeyStore: String
+        var KeyPass: String
+        var SigningScheme: Int
+    }
+    let jsonData = jsonPath.data(using: .utf8)!
+    let config = try! JSONDecoder().decode(Config.self, from: jsonData)
+    return (config.AppName, config.PackageName, config.AppPath, config.KeyStore, config.KeyPass, config.SigningScheme)
 }
