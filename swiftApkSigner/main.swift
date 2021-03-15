@@ -67,7 +67,7 @@ do {
 
 //let jsonFile = FileHandler().getScriptDirectory().appendingPathComponent("")
 
-func checkJson() -> String {
+func checkJson() -> String! {
     let check = FileFinderCurrent().searchInDir()
     print("var test: ", check)
     
@@ -81,6 +81,7 @@ func checkJson() -> String {
         print("jsonPath=",jsonPath)
         return jsonPath
     }
+    return nil
 }
 
 
