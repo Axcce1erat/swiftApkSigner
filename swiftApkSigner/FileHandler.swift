@@ -3,7 +3,7 @@ import Foundation
 import SwiftShell
 import Darwin
 
-class FileHandler{
+public class FileHandler{
     
       
     func getScriptDirectory() -> URL {
@@ -16,16 +16,15 @@ class FileHandler{
         let stringScript = "\(urlScript.path)"
         return stringScript
     }
-    
-    func writingStartJson (PackageName: String) {
-        
+
+    func createJsonString (PackageName: String) -> String? {
         struct Make: Codable {
             var PackageName: String?
             var AppName: String?
             var AppPath: String?
             var KeyStore: String?
             var KeyPass: String?
-            var SingingScheme: Int?
+            var SigningScheme: Int?
         }
 
         var make = Make()
@@ -34,11 +33,7 @@ class FileHandler{
         make.AppPath = ""
         make.KeyStore = ""
         make.KeyPass = ""
-        make.SingingScheme = 0
-
-        let initJsonData = try! JSONEncoder().encode(make)
-        let initJsonString = String(data: initJsonData, encoding: .utf8)!
-        //print(initJsonString)
+        make.SigningScheme = 0
 
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
@@ -47,12 +42,19 @@ class FileHandler{
             let initJsonData = try encoder.encode(make)
 
             if let initJsonString = String(data: initJsonData, encoding: .utf8) {
-                print(initJsonString)
+                return initJsonString
             }
         } catch {
-            print(error.localizedDescription)
         }
+        return nil
+    }
 
+    func writingStartJson (PackageName: String) {
+        
+        guard let initJsonString = createJsonString(PackageName: PackageName) else {
+            print ("Evil error")
+            return
+        }
         if let jsonDataFile = initJsonString.data(using: .utf8){
                 let pathWithFileName = FileHandler().getScriptDirectory().appendingPathComponent("\(packageName)_Config.json")
             do {
@@ -63,7 +65,7 @@ class FileHandler{
         }
     }
     
-struct Config : Codable{
+public struct Config : Codable{
         var PackageName: String
         var AppName: String
         var AppPath: String
