@@ -38,7 +38,7 @@ do {
 catch let error as NSError {
     print("Ooops! Something went wrong with renaming the apk file for the script: \(error)")
 }
-
+/*
 // writing to text file androidManifest filtered output
 let packageNameConfig = FileHandler().getScriptDirectory().appendingPathComponent("PackageNameConfig.txt")
 
@@ -47,105 +47,33 @@ do {
 } catch {
     print ("failed to write file – bad permissions, bad filename, missing permissions, or more likely it can't be converted to the encoding")
 }
+*/
 
-let stringScript = FileHandler().dataFromSingingScript()
-
-let keystore = "test.keystore"
-let pass = "pass.txt"
-let valueSigningScheme = "2"
-
-let apkSignerDtagXcode = run(stringScript, keystore,  pass, valueSigningScheme, apkName).stdout
-print(apkSignerDtagXcode)
-
-let apkParameter = FileHandler().getScriptDirectory().appendingPathComponent("apk_parameter.txt")
-
-do {
-    try apkSignerDtagXcode.write(to: apkParameter, atomically: true, encoding: String.Encoding.utf8)
-} catch {
-    print ("failed to write file – bad permissions, bad filename, missing permissions, or more likely it can't be converted to the encoding")
-}
-
-//let jsonFile = FileHandler().getScriptDirectory().appendingPathComponent("")
-
-func checkJson() -> String! {
-    let check = FileFinderCurrent().searchInDir()
-    print("var check: ", check)
+let checkJsonResult: String = FileHandler().checkJson()
+print("checkJsonResult: ", checkJsonResult)
+if let newJsonData = FileHandler().handleJsonData(jsonPath: checkJsonResult){
+    print("newJsonData: ", newJsonData)
+    print("newJsonData.PackageName: ", newJsonData.PackageName)
+    print("newJsonData.AppName: ", newJsonData.AppName)
+    print("newJsonData.AppPath: ", newJsonData.AppPath)
+    print("newJsonData.KeyStore: ", newJsonData.KeyStore)
+    print("newJsonData.KeyPass: ", newJsonData.KeyPass)
+    print("newJsonData.SigningScheme: ", newJsonData.SigningScheme)
     
-    if (check == true){
-        //json hanling writing start json
-        FileHandler().writingStartJson(PackageName: packageName)
-        
-        return nil
-    }
-    else if (check == false){
-        let jsonPath = loadJson(fileName: packageName)
-        print("jsonPath=",jsonPath)
-        return jsonPath
-    }
-    return nil
-}
-
-let checkJsonResult: String! = checkJson()
-print("checkJsonResult: ", checkJsonResult!)
-if let newJsonData = handleJsonData(jsonPath: checkJsonResult){
-    print("newJsonData: ", newJsonData.PackageName)
-    print("SigningScheme: ", newJsonData.SigningScheme)
-}
-
-
-func loadJson(fileName: String) -> String{
+    let stringScript = FileHandler().dataFromSingingScript()
+    let stringSigningScheme: String = String(newJsonData.SigningScheme)
     
-    let urlJson = URL(fileURLWithPath: "/Users/axelschwarz/Library/Developer/Xcode/DerivedData/swiftApkSigner-gqryovkkaznkrogfwnjulbdgxrqq/Build/Products/Debug/\(packageName)_Config.json")
-    let jsonString = "\(urlJson.path)"
-    return jsonString
-}
+    let apkSignerDtagXcode = run(stringScript, newJsonData.KeyStore, newJsonData.KeyPass, stringSigningScheme, apkName).stdout
+    print(apkSignerDtagXcode)
+    
+    let apkParameter = FileHandler().getScriptDirectory().appendingPathComponent("apk_parameter.txt")
 
-private func readLocalFile(forName name: String) -> Data? {
     do {
-        if let bundlePath = Bundle.main.path(forResource: name,
-                                             ofType: "json"),
-            let jsonData = try String(contentsOfFile: bundlePath).data(using: .utf8) {
-            return jsonData
-        }
+        try apkSignerDtagXcode.write(to: apkParameter, atomically: true, encoding: String.Encoding.utf8)
     } catch {
-        print(error)
+        print ("failed to write file – bad permissions, bad filename, missing permissions, or more likely it can't be converted to the encoding")
     }
-    return nil
 }
-
-struct Config : Codable{
-    var PackageName: String
-    var AppName: String
-    var AppPath: String
-    var KeyStore: String
-    var KeyPass: String
-    var SigningScheme: Int
-}
-
-func handleJsonData(jsonPath: String) -> Config? {
+else{
     
-    let jsonDataRaw = try! String(contentsOfFile: jsonPath)
-    print(jsonDataRaw)
-    
-    if let jsonData = try! String(contentsOfFile: jsonPath).data(using: .utf8)
-    {
-        print("jsonData: ", jsonData)
-        let decoder = JSONDecoder()
-        print("decoder: ", decoder)
-
-         do {
-            let config = try decoder.decode(Config.self, from: jsonData)
-            print("config: ", config)
-            print(config.AppName)
-            print(config.PackageName)
-            print(config.AppPath)
-            print(config.KeyStore)
-            print(config.KeyPass)
-            print(config.SigningScheme)
-            return config
-         } catch {
-             print(error.localizedDescription)
-         }
-    }
-    return nil
 }
