@@ -14,6 +14,10 @@
 		656D051825E9116F006FF8B3 /* ConsoleIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656D051725E9116F006FF8B3 /* ConsoleIO.swift */; };
 		65EDFB7A25E3CFC4006D10D5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EDFB7925E3CFC4006D10D5 /* main.swift */; };
 		65EDFB8725E3DDDC006D10D5 /* SwiftShell in Frameworks */ = {isa = PBXBuildFile; productRef = 65EDFB8625E3DDDC006D10D5 /* SwiftShell */; };
+		CB98FCF92600FB3500A9EE2E /* FileHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656B24A725F92A1400685CB5 /* FileHandler.swift */; };
+		CB98FD042600FB7B00A9EE2E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EDFB7925E3CFC4006D10D5 /* main.swift */; };
+		CB98FD072600FB9000A9EE2E /* Preparation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656B249F25F913F800685CB5 /* Preparation.swift */; };
+		CB98FD152600FBCC00A9EE2E /* SwiftShell in Frameworks */ = {isa = PBXBuildFile; productRef = CB98FD142600FBCC00A9EE2E /* SwiftShell */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,7 +33,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		655643D125F2365500878AD9 /* apkSingnerTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = apkSingnerTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		655643E125F2414700878AD9 /* swiftApkSignerTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = swiftApkSignerTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		655643E325F2414700878AD9 /* swiftApkSignerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swiftApkSignerTest.swift; sourceTree = "<group>"; };
 		655643E525F2414700878AD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -44,17 +47,11 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		655643CE25F2365500878AD9 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		655643DE25F2414700878AD9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB98FD152600FBCC00A9EE2E /* SwiftShell in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,6 +90,7 @@
 				65EDFB7825E3CFC4006D10D5 /* swiftApkSigner */,
 				655643E225F2414700878AD9 /* swiftApkSignerTest */,
 				65EDFB7725E3CFC4006D10D5 /* Products */,
+				CB98FD132600FBCC00A9EE2E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -100,7 +98,6 @@
 			isa = PBXGroup;
 			children = (
 				65EDFB7625E3CFC4006D10D5 /* swiftApkSigner */,
-				655643D125F2365500878AD9 /* apkSingnerTest.xctest */,
 				655643E125F2414700878AD9 /* swiftApkSignerTest.xctest */,
 			);
 			name = Products;
@@ -119,26 +116,16 @@
 			path = swiftApkSigner;
 			sourceTree = "<group>";
 		};
+		CB98FD132600FBCC00A9EE2E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		655643D025F2365500878AD9 /* apkSingnerTest */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 655643D825F2365500878AD9 /* Build configuration list for PBXNativeTarget "apkSingnerTest" */;
-			buildPhases = (
-				655643CD25F2365500878AD9 /* Sources */,
-				655643CE25F2365500878AD9 /* Frameworks */,
-				655643CF25F2365500878AD9 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = apkSingnerTest;
-			productName = apkSingnerTest;
-			productReference = 655643D125F2365500878AD9 /* apkSingnerTest.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		655643E025F2414700878AD9 /* swiftApkSignerTest */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 655643E625F2414700878AD9 /* Build configuration list for PBXNativeTarget "swiftApkSignerTest" */;
@@ -150,8 +137,12 @@
 			buildRules = (
 			);
 			dependencies = (
+				CB98FD102600FBAC00A9EE2E /* PBXTargetDependency */,
 			);
 			name = swiftApkSignerTest;
+			packageProductDependencies = (
+				CB98FD142600FBCC00A9EE2E /* SwiftShell */,
+			);
 			productName = swiftApkSignerTest;
 			productReference = 655643E125F2414700878AD9 /* swiftApkSignerTest.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -185,9 +176,6 @@
 				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
-					655643D025F2365500878AD9 = {
-						CreatedOnToolsVersion = 12.4;
-					};
 					655643E025F2414700878AD9 = {
 						CreatedOnToolsVersion = 12.4;
 					};
@@ -213,20 +201,12 @@
 			projectRoot = "";
 			targets = (
 				65EDFB7525E3CFC4006D10D5 /* swiftApkSigner */,
-				655643D025F2365500878AD9 /* apkSingnerTest */,
 				655643E025F2414700878AD9 /* swiftApkSignerTest */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		655643CF25F2365500878AD9 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		655643DF25F2414700878AD9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -237,18 +217,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		655643CD25F2365500878AD9 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		655643DD25F2414700878AD9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				655643E425F2414700878AD9 /* swiftApkSignerTest.swift in Sources */,
+				CB98FD072600FB9000A9EE2E /* Preparation.swift in Sources */,
+				CB98FCF92600FB3500A9EE2E /* FileHandler.swift in Sources */,
+				CB98FD042600FB7B00A9EE2E /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,43 +242,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		CB98FD102600FBAC00A9EE2E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = CB98FD0F2600FBAC00A9EE2E /* SwiftShell */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
-		655643D625F2365500878AD9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = VZVFUQTSQC;
-				INFOPLIST_FILE = apkSingnerTest/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.Deutsche-Telekom-AG.IHUB.apkSingnerTest";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		655643D725F2365500878AD9 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = VZVFUQTSQC;
-				INFOPLIST_FILE = apkSingnerTest/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.Deutsche-Telekom-AG.IHUB.apkSingnerTest";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
 		655643E725F2414700878AD9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -390,7 +337,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 11.1;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -445,7 +392,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 11.1;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -479,15 +426,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		655643D825F2365500878AD9 /* Build configuration list for PBXNativeTarget "apkSingnerTest" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				655643D625F2365500878AD9 /* Debug */,
-				655643D725F2365500878AD9 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		655643E625F2414700878AD9 /* Build configuration list for PBXNativeTarget "swiftApkSignerTest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -530,6 +468,16 @@
 
 /* Begin XCSwiftPackageProductDependency section */
 		65EDFB8625E3DDDC006D10D5 /* SwiftShell */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 65EDFB8525E3DDDC006D10D5 /* XCRemoteSwiftPackageReference "SwiftShell" */;
+			productName = SwiftShell;
+		};
+		CB98FD0F2600FBAC00A9EE2E /* SwiftShell */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 65EDFB8525E3DDDC006D10D5 /* XCRemoteSwiftPackageReference "SwiftShell" */;
+			productName = SwiftShell;
+		};
+		CB98FD142600FBCC00A9EE2E /* SwiftShell */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 65EDFB8525E3DDDC006D10D5 /* XCRemoteSwiftPackageReference "SwiftShell" */;
 			productName = SwiftShell;

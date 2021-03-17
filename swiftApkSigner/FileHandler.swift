@@ -3,7 +3,7 @@ import Foundation
 import SwiftShell
 import Darwin
 
-class FileHandler{
+public class FileHandler{
     
       
     func getScriptDirectory() -> URL {
@@ -65,7 +65,8 @@ class FileHandler{
         }
     }
 
-struct Config : Codable{
+public struct Config : Codable{
+
         var PackageName: String
         var AppName: String
         var AppPath: String

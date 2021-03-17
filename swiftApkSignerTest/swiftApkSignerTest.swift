@@ -6,6 +6,16 @@
 //
 
 import XCTest
+@testable import swiftApkSigner
+
+extension String {
+    var removingWhitespace: String {
+        let result = self.unicodeScalars.filter {
+            false == NSCharacterSet.whitespacesAndNewlines.contains($0)
+        }.map(Character.init)
+        return String(result)
+    }
+}
 
 class swiftApkSignerTest: XCTestCase {
 
@@ -17,16 +27,55 @@ class swiftApkSignerTest: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testRemovingWhitespace() {
+        let input = "foo \n bar!"
+
+        let output = input.removingWhitespace
+
+        XCTAssertEqual(output, "foobar!", "Strings not equal")
     }
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
+
+    func testCreatingJsonConfig() {
+
+        let jsonInput = """
+        {
+            "AppPath":"",
+            "SigningScheme":0,
+            "KeyStore":"",
+            "KeyPass":"",
+            "AppName":"",
+            "PackageName":"de.telekom.appstarter"
         }
+        """
+
+        let sut = FileHandler()
+        let output = sut.createJsonString(PackageName: "de.telekom.appstarter")
+
+        XCTAssertEqual(output?.removingWhitespace, jsonInput.removingWhitespace, "Output and Input did not match")
+
     }
 
+    func testConfigDecoding() throws {
+
+        let jsonInput = """
+        {
+            "AppPath":"/Users/axelschwarz/Library/Developer/Xcode/DerivedData/swiftApkSigner-gqryovkkaznkrogfwnjulbdgxrqq/Build/Products/Debug/",
+            "KeyStore":"test.keystore",
+            "KeyPass":"pass.txt",
+            "AppName":"appstarter",
+            "PackageName":"de.telekom.appstarter",
+            "SigningScheme":2
+        }
+        """
+
+        guard let data = jsonInput.data(using: .utf8) else {
+            XCTFail("Unable to create data")
+            return
+        }
+        let decoder = JSONDecoder()
+
+        XCTAssertNoThrow(try decoder.decode(FileHandler.Config.self, from: data), "Decoding did not work")
+
+    }
 }
