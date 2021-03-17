@@ -38,16 +38,6 @@ do {
 catch let error as NSError {
     print("Ooops! Something went wrong with renaming the apk file for the script: \(error)")
 }
-/*
-// writing to text file androidManifest filtered output
-let packageNameConfig = FileHandler().getScriptDirectory().appendingPathComponent("PackageNameConfig.txt")
-
-do {
-    try appt.write(to: packageNameConfig, atomically: true, encoding: String.Encoding.utf8)
-} catch {
-    print ("failed to write file – bad permissions, bad filename, missing permissions, or more likely it can't be converted to the encoding")
-}
-*/
 
 let checkJsonResult: String = FileHandler().checkJson()
 print("checkJsonResult: ", checkJsonResult)

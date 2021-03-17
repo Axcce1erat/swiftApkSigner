@@ -64,8 +64,9 @@ public class FileHandler{
             }
         }
     }
-    
+
 public struct Config : Codable{
+
         var PackageName: String
         var AppName: String
         var AppPath: String
@@ -109,7 +110,7 @@ public struct Config : Codable{
         
         if (check == false){
             FileHandler().writingStartJson(PackageName: packageName)
-            print("Emty Json generated please insert missung data and start again")
+            print("Empty Json generated please insert missung data and start again")
             exit(0)
         }
         else if (check == true){
@@ -121,17 +122,16 @@ public struct Config : Codable{
     }
     
     func searchInDir () -> Bool {
-        let fileManagerDirectory = getScriptDirectory().path
-        let fileManagerDirectoryJson = "\(fileManagerDirectory)/\(packageName)_Config.json"
-        print("fileManagerDirectoryJson: ", fileManagerDirectoryJson)
         
-        // Get path where the script is
-        if (fileManagerDirectoryJson.hasSuffix(".json")) {
-            return true
-        }
-        else{
-            return false
-        }
+        let urlJson = getScriptDirectory()
+        let stringJson = "\(urlJson.path)/\(packageName)_Config.json"
+        print("stringJson: ", stringJson)
+        
+        if FileManager.default.isReadableFile(atPath: stringJson) {
+                    return true
+                }
+        else {
+                    return false
+            }
     }
-
 }
