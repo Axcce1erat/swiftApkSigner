@@ -16,9 +16,8 @@ class FileHandler{
         let stringScript = "\(urlScript.path)"
         return stringScript
     }
-    
-    func writingStartJson (PackageName: String) {
-        
+
+    func createJsonString (PackageName: String) -> String? {
         struct Make: Codable {
             var PackageName: String?
             var AppName: String?
@@ -36,10 +35,6 @@ class FileHandler{
         make.KeyPass = ""
         make.SigningScheme = 0
 
-        let initJsonData = try! JSONEncoder().encode(make)
-        let initJsonString = String(data: initJsonData, encoding: .utf8)!
-        //print(initJsonString)
-
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
 
@@ -47,12 +42,19 @@ class FileHandler{
             let initJsonData = try encoder.encode(make)
 
             if let initJsonString = String(data: initJsonData, encoding: .utf8) {
-                print(initJsonString)
+                return initJsonString
             }
         } catch {
-            print(error.localizedDescription)
         }
+        return nil
+    }
 
+    func writingStartJson (PackageName: String) {
+        
+        guard let initJsonString = createJsonString(PackageName: PackageName) else {
+            print ("Evil error")
+            return
+        }
         if let jsonDataFile = initJsonString.data(using: .utf8){
                 let pathWithFileName = FileHandler().getScriptDirectory().appendingPathComponent("\(packageName)_Config.json")
             do {
@@ -62,7 +64,7 @@ class FileHandler{
             }
         }
     }
-    
+
 struct Config : Codable{
         var PackageName: String
         var AppName: String
