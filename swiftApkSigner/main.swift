@@ -26,7 +26,7 @@ let (packageName, versionCode, versionName, debug) = Preparation().filterWithReg
 let debugOption = Preparation().debugRelease(debugOption: debug)
 
 let checkJsonResult: String = FileHandler().checkJson()
-print("checkJsonResult: ", checkJsonResult)
+
 if let newJsonData = FileHandler().handleJsonData(jsonPath: checkJsonResult){
     
     //concatenate strings for apk name
@@ -37,8 +37,7 @@ if let newJsonData = FileHandler().handleJsonData(jsonPath: checkJsonResult){
     else {
         fatalError("apk not found")
     }
-    print("\n\nTestingPath:\(apkPath)\n\n")
-
+   
     let fileManager = FileManager.default
 
     do {
@@ -47,14 +46,6 @@ if let newJsonData = FileHandler().handleJsonData(jsonPath: checkJsonResult){
     catch let error as NSError {
         print("Ooops! Something went wrong with renaming the apk file for the script: \(error)")
     }
-    
-    print("newJsonData: ", newJsonData)
-    print("newJsonData.PackageName: ", newJsonData.PackageName)
-    print("newJsonData.AppName: ", newJsonData.AppName)
-    print("newJsonData.AppPath: ", newJsonData.AppPath)
-    print("newJsonData.KeyStore: ", newJsonData.KeyStore)
-    print("newJsonData.KeyPass: ", newJsonData.KeyPass)
-    print("newJsonData.SigningScheme: ", newJsonData.SigningScheme)
     
     let stringScript = FileHandler().dataFromSingingScript()
     let stringSigningScheme: String = String(newJsonData.SigningScheme)
