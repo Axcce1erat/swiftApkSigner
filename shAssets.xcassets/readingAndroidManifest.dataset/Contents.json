@@ -1,0 +1,12 @@
+{
+  "data" : [
+    {
+      "filename" : "readingAndroidManifest.sh",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

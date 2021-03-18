@@ -25,23 +25,29 @@ let (packageName, versionCode, versionName, debug) = Preparation().filterWithReg
 
 let debugOption = Preparation().debugRelease(debugOption: debug)
 
-//concatenate strings for apk name
-let apkName = "\(packageName)_\(versionName)_\(versionCode)_\(debugOption).apk"
-
-// rename apk file inScript
-let apk = "de.telekom.appstarter_12.0.0-001_120000000_debug.apk"
-let fileManager = FileManager.default
-
-do {
-    try fileManager.moveItem(atPath: apk, toPath: apkName)
-}
-catch let error as NSError {
-    print("Ooops! Something went wrong with renaming the apk file for the script: \(error)")
-}
-
 let checkJsonResult: String = FileHandler().checkJson()
 print("checkJsonResult: ", checkJsonResult)
 if let newJsonData = FileHandler().handleJsonData(jsonPath: checkJsonResult){
+    
+    //concatenate strings for apk name
+    let apkName = "\(newJsonData.AppName)_\(versionName)_\(versionCode)_\(debugOption).apk"
+
+    // rename apk file inScript
+    guard let apkPath = Bundle.main.path(forResource: nil, ofType: "apk")
+    else {
+        fatalError("apk not found")
+    }
+    print("\n\nTestingPath:\(apkPath)\n\n")
+
+    let fileManager = FileManager.default
+
+    do {
+        try fileManager.moveItem(atPath: apkPath, toPath: apkName)
+    }
+    catch let error as NSError {
+        print("Ooops! Something went wrong with renaming the apk file for the script: \(error)")
+    }
+    
     print("newJsonData: ", newJsonData)
     print("newJsonData.PackageName: ", newJsonData.PackageName)
     print("newJsonData.AppName: ", newJsonData.AppName)
@@ -56,14 +62,11 @@ if let newJsonData = FileHandler().handleJsonData(jsonPath: checkJsonResult){
     let apkSignerDtagXcode = run(stringScript, newJsonData.KeyStore, newJsonData.KeyPass, stringSigningScheme, apkName).stdout
     print(apkSignerDtagXcode)
     
-    let apkParameter = FileHandler().getScriptDirectory().appendingPathComponent("apk_parameter.txt")
+    let apkParameter = FileHandler().getScriptDirectory().appendingPathComponent("\(newJsonData.AppName)_\(versionName)_\(versionCode)_\(debugOption)_log.txt")
 
     do {
         try apkSignerDtagXcode.write(to: apkParameter, atomically: true, encoding: String.Encoding.utf8)
     } catch {
         print ("failed to write file – bad permissions, bad filename, missing permissions, or more likely it can't be converted to the encoding")
     }
-}
-else{
-    
 }

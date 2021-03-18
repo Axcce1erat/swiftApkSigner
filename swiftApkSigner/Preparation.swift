@@ -4,10 +4,17 @@ import SwiftShell
 class Preparation{
     
     func dataFromAndroidManifest() -> String{
-        let urlStartScript = URL(fileURLWithPath: "/Users/axelschwarz/development/swiftApkSigner/swiftApkSigner/assets/readingAndroidManifest.sh")
-        let stringStartScript = "\(urlStartScript.path)"
-
-        let startApk = "de.telekom.appstarter_12.0.0-001_120000000_debug.apk"
+//        let urlStartScript = URL(fileURLWithPath: "/Users/axelschwarz/development/swiftApkSigner/swiftApkSigner/readingAndroidManifest.sh")
+//        let stringStartScript = "\(urlStartScript.path)"
+//
+//        let startApk = "appstarter_12.0.0-001_120000000_debug.apk"
+        let path = Bundle.main.url(forResource: "readingAndroidManifest", withExtension: "sh")
+        let stringStartScript = "\(path!.path)"
+        
+        guard let startApk = Bundle.main.path(forResource: nil, ofType: "apk")
+        else {
+            fatalError("apk not found")
+        }
 
         let appt = run(stringStartScript, startApk).stdout
         

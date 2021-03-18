@@ -1,4 +1,3 @@
-
 import Foundation
 import SwiftShell
 import Darwin
@@ -7,14 +6,19 @@ public class FileHandler{
     
       
     func getScriptDirectory() -> URL {
-        let paths = URL(fileURLWithPath: "/Users/axelschwarz/Library/Developer/Xcode/DerivedData/swiftApkSigner-gqryovkkaznkrogfwnjulbdgxrqq/Build/Products/Debug")
-        return paths
+        let currentDirectoryURL = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
+        return currentDirectoryURL
     }
 
     func dataFromSingingScript () -> String{
-        let urlScript = URL(fileURLWithPath: "/Users/axelschwarz/development/swiftApkSigner/swiftApkSigner/assets/apkSignerDtagXcode.sh")
-        let stringScript = "\(urlScript.path)"
-        return stringScript
+        let path = Bundle.main.url(forResource: "apkSignerDtagXcode", withExtension: "sh")
+        let pathUrl = "\(path!.path)"
+        //print("\n\nTestingPath:\(pathUrl)\n\n")
+        return pathUrl
+        //        let urlScript = URL(fileURLWithPath: "/Users/axelschwarz/development/swiftApkSigner/swiftApkSigner/apkSignerDtagXcode.sh")
+        //        let stringScript = "\(urlScript.path)"
+        //        print("\n\nTestingPath:\(stringScript)\n\n")
+        //        return stringScript
     }
 
     func createJsonString (PackageName: String) -> String? {
@@ -99,7 +103,8 @@ public struct Config : Codable{
 
     func loadJson(fileName: String) -> String{
         
-        let urlJson = URL(fileURLWithPath: "/Users/axelschwarz/Library/Developer/Xcode/DerivedData/swiftApkSigner-gqryovkkaznkrogfwnjulbdgxrqq/Build/Products/Debug/\(packageName)_Config.json")
+        let urlJsonDir = getScriptDirectory()
+        let urlJson = URL(fileURLWithPath: "\(urlJsonDir.path)/\(packageName)_Config.json")
         let jsonString = "\(urlJson.path)"
         return jsonString
     }

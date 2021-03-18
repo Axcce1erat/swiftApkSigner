@@ -1,10 +1,3 @@
-//
-//  swiftApkSignerTest.swift
-//  swiftApkSignerTest
-//
-//  Created by Axel Schwarz on 05.03.21.
-//
-
 import XCTest
 @testable import swiftApkSigner
 
@@ -49,11 +42,10 @@ class swiftApkSignerTest: XCTestCase {
         }
         """
 
-        let sut = FileHandler()
-        let output = sut.createJsonString(PackageName: "de.telekom.appstarter")
-
-        XCTAssertEqual(output?.removingWhitespace, jsonInput.removingWhitespace, "Output and Input did not match")
-
+        let fileHandler = FileHandler()
+        let outputPackageName = fileHandler.createJsonString(PackageName: "de.telekom.appstarter")
+        
+        XCTAssertEqual(outputPackageName?.removingWhitespace, jsonInput.removingWhitespace, "Output and Input did not match")
     }
 
     func testConfigDecoding() throws {
@@ -76,6 +68,29 @@ class swiftApkSignerTest: XCTestCase {
         let decoder = JSONDecoder()
 
         XCTAssertNoThrow(try decoder.decode(FileHandler.Config.self, from: data), "Decoding did not work")
-
+    }
+    
+    func testCanParseConfigViaJsonFile(){
+        
+        guard let pathString = Bundle(for: type(of: self)).path(forResource: "config", ofType: "json")
+        else {
+            fatalError("test json not found")
+        }
+        print("\n\nTestingPath:\(pathString)\n\n")
+        
+        guard let json = try? String(contentsOfFile: pathString, encoding: .utf8)
+        else {
+            fatalError("unable to convert json to String")
+        }
+        
+        let jsonData = json.data(using: .utf8)!
+        let config = try! JSONDecoder().decode(FileHandler.Config.self, from: jsonData)
+        
+        XCTAssertEqual("appstarter", config.AppName)
+        XCTAssertEqual("test.keystore", config.KeyStore)
+        XCTAssertEqual("de.telekom.appstarter", config.PackageName)
+        XCTAssertEqual("pass.txt", config.KeyPass)
+        XCTAssertEqual(2, config.SigningScheme)
+        XCTAssertEqual("/Users/axelschwarz/Library/Developer/Xcode/DerivedData/swiftApkSigner-gqryovkkaznkrogfwnjulbdgxrqq/Build/Products/Debug/", config.AppPath)
     }
 }

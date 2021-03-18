@@ -1,0 +1,8 @@
+{
+    "AppPath":"/Users/axelschwarz/Library/Developer/Xcode/DerivedData/swiftApkSigner-gqryovkkaznkrogfwnjulbdgxrqq/Build/Products/Debug/",
+    "KeyStore":"test.keystore",
+    "KeyPass":"pass.txt",
+    "AppName":"appstarter",
+    "PackageName":"de.telekom.appstarter",
+    "SigningScheme":2
+}
