@@ -60,4 +60,30 @@ if let newJsonData = FileHandler().handleJsonData(jsonPath: checkJsonResult){
     } catch {
         print ("failed to write file – bad permissions, bad filename, missing permissions, or more likely it can't be converted to the encoding")
     }
+    
+    //let resultDir: URL = URL(fileURLWithPath: newJsonData.AppPath)
+    
+    let apkNameWithoutIndex = "\(newJsonData.AppName)_\(versionName)_\(versionCode)_\(debugOption)"
+    let apkParameterName = "\(newJsonData.AppName)_\(versionName)_\(versionCode)_\(debugOption)_log.txt"
+    
+    let apkNameURL: URL = FileHandler().getScriptDirectory().appendingPathComponent(apkName)
+    let apkNameAlinged: URL = FileHandler().getScriptDirectory().appendingPathComponent("\(apkNameWithoutIndex)_aligned.apk")
+    let apkNameAlingedSigned: URL = FileHandler().getScriptDirectory().appendingPathComponent("\(apkNameWithoutIndex)_aligned_signed.apk")
+    let apkParameterToString: URL = apkParameter
+    
+    let apkNameUrlDes: URL = FileHandler().getScriptDirectory().appendingPathComponent("signed/\(apkName)")
+    
+    let apkNameAlingedDes: URL = FileHandler().getScriptDirectory().appendingPathComponent("signed/\(apkNameWithoutIndex)_aligned.apk")
+    let apkNameAlingedSignedDes: URL = FileHandler().getScriptDirectory().appendingPathComponent("signed/\(apkNameWithoutIndex)_aligned_signed.apk")
+    let apkParameterToStringDes: URL = FileHandler().getScriptDirectory().appendingPathComponent("signed/\(apkParameterName)")
+    
+    do {
+        try fileManager.moveItem(at: apkNameURL, to: apkNameUrlDes)
+        try fileManager.moveItem(at: apkNameAlinged, to: apkNameAlingedDes)
+        try fileManager.moveItem(at: apkNameAlingedSigned, to: apkNameAlingedSignedDes)
+        try fileManager.moveItem(at: apkParameterToString, to: apkParameterToStringDes)
+    }
+    catch let error as NSError {
+        print("Ooops! Something went wrong with cut and copy the singing results: \(error)")
+    }
 }

@@ -40,7 +40,6 @@
 		655643E125F2414700878AD9 /* swiftApkSignerTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = swiftApkSignerTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		655643E325F2414700878AD9 /* swiftApkSignerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swiftApkSignerTest.swift; sourceTree = "<group>"; };
 		655643E525F2414700878AD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		656AF5F226039162001477D3 /* shAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = shAssets.xcassets; sourceTree = "<group>"; };
 		656AF5F52603989D001477D3 /* apkSignerDtagXcode.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = apkSignerDtagXcode.sh; sourceTree = "<group>"; };
 		656AF5F62603989D001477D3 /* readingAndroidManifest.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = readingAndroidManifest.sh; sourceTree = "<group>"; };
 		656B249F25F913F800685CB5 /* Preparation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preparation.swift; sourceTree = "<group>"; };
@@ -92,7 +91,6 @@
 		65EDFB6D25E3CFC4006D10D5 = {
 			isa = PBXGroup;
 			children = (
-				656AF5F226039162001477D3 /* shAssets.xcassets */,
 				65EDFB7825E3CFC4006D10D5 /* swiftApkSigner */,
 				655643E225F2414700878AD9 /* swiftApkSignerTest */,
 				65EDFB7725E3CFC4006D10D5 /* Products */,
