@@ -128,4 +128,8 @@ public struct Config : Codable{
                     return false
             }
     }
+    
+    func handelSubDir() -> String{
+        return "a"
+    }
 }

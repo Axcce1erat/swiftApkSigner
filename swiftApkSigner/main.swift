@@ -2,23 +2,7 @@
 import Foundation
 import AppKit
 import SwiftShell
-/*
-let fileFinderCurrent = FileFinderCurrent()
-let fileFinder = FileFinder()
 
-// console output
-if CommandLine.argc < 1 {
-    let consoleIO = ConsoleIO()
-    consoleIO.printUsage()
-} else {
-   //let fileFinder = FileFinder()
-   //let apkName = CommandLine.arguments[1]
-   //let argument = "keystore"
-   //fileFinder.searchInSubDir(subDir: argument)
-   let fileFinderCurrent = FileFinderCurrent()
-   fileFinderCurrent.searchInDir()
-}
-*/
 let appt = Preparation().dataFromAndroidManifest()
 
 let (packageName, versionCode, versionName, debug) = Preparation().filterWithRegex(appt: appt)
@@ -29,10 +13,9 @@ let checkJsonResult: String = FileHandler().checkJson()
 
 if let newJsonData = FileHandler().handleJsonData(jsonPath: checkJsonResult){
     
-    //concatenate strings for apk name
     let apkName = "\(newJsonData.AppName)_\(versionName)_\(versionCode)_\(debugOption).apk"
 
-    // rename apk file inScript
+    
     guard let apkPath = Bundle.main.path(forResource: nil, ofType: "apk")
     else {
         fatalError("apk not found")
@@ -61,21 +44,42 @@ if let newJsonData = FileHandler().handleJsonData(jsonPath: checkJsonResult){
         print ("failed to write file – bad permissions, bad filename, missing permissions, or more likely it can't be converted to the encoding")
     }
     
-    //let resultDir: URL = URL(fileURLWithPath: newJsonData.AppPath)
-    
     let apkNameWithoutIndex = "\(newJsonData.AppName)_\(versionName)_\(versionCode)_\(debugOption)"
     let apkParameterName = "\(newJsonData.AppName)_\(versionName)_\(versionCode)_\(debugOption)_log.txt"
+    //let apkParameterNameDir = "\(newJsonData.AppName)_\(versionName)_\(versionCode)_\(debugOption)"
     
     let apkNameURL: URL = FileHandler().getScriptDirectory().appendingPathComponent(apkName)
     let apkNameAlinged: URL = FileHandler().getScriptDirectory().appendingPathComponent("\(apkNameWithoutIndex)_aligned.apk")
     let apkNameAlingedSigned: URL = FileHandler().getScriptDirectory().appendingPathComponent("\(apkNameWithoutIndex)_aligned_signed.apk")
     let apkParameterToString: URL = apkParameter
     
-    let apkNameUrlDes: URL = FileHandler().getScriptDirectory().appendingPathComponent("signed/\(apkName)")
+    func handelSubDir() -> String{
+        if(newJsonData.AppName == newJsonData.AppPath){
+            let appNameDir = newJsonData.AppName
+            return appNameDir
+        }
+        else{
+            let appNameDir = newJsonData.AppPath
+            return appNameDir
+        }
+    }
     
-    let apkNameAlingedDes: URL = FileHandler().getScriptDirectory().appendingPathComponent("signed/\(apkNameWithoutIndex)_aligned.apk")
-    let apkNameAlingedSignedDes: URL = FileHandler().getScriptDirectory().appendingPathComponent("signed/\(apkNameWithoutIndex)_aligned_signed.apk")
-    let apkParameterToStringDes: URL = FileHandler().getScriptDirectory().appendingPathComponent("signed/\(apkParameterName)")
+    let destionationPath = "signedApks/\(handelSubDir())/\(versionName)/\(debugOption)"
+    let scriptURLDestionation = FileHandler().getScriptDirectory().appendingPathComponent(destionationPath)
+    print(scriptURLDestionation)
+    
+    let apkNameUrlDes: URL = FileHandler().getScriptDirectory().appendingPathComponent("\(destionationPath)/\(apkName)")
+    print(apkNameUrlDes)
+    let apkNameAlingedDes: URL = FileHandler().getScriptDirectory().appendingPathComponent("\(destionationPath)/\(apkNameWithoutIndex)_aligned.apk")
+    let apkNameAlingedSignedDes: URL = FileHandler().getScriptDirectory().appendingPathComponent("\(destionationPath)/\(apkNameWithoutIndex)_aligned_signed.apk")
+    let apkParameterToStringDes: URL = FileHandler().getScriptDirectory().appendingPathComponent("\(destionationPath)/\(apkParameterName)")
+        
+    do {
+        try fileManager.createDirectory(at: scriptURLDestionation, withIntermediateDirectories: true, attributes: nil)
+    }
+    catch let error as NSError {
+        print("Ooops! Something went wrong with creating directorys: \(error)")
+    }
     
     do {
         try fileManager.moveItem(at: apkNameURL, to: apkNameUrlDes)
