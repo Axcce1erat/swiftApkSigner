@@ -1,6 +1,7 @@
 import Foundation
 import SwiftShell
 import Darwin
+import AppKit
 
 public class FileHandler{
     
@@ -129,7 +130,19 @@ public struct Config : Codable{
             }
     }
     
-    func handelSubDir() -> String{
-        return "a"
-    }
+    func reNameApkFile(apkName: String) {
+        guard let apkPath = Bundle.main.path(forResource: nil, ofType: "apk")
+        else {
+            fatalError("apk not found")
+        }
+       
+        let fileManager = FileManager.default
+
+        do {
+            try fileManager.moveItem(atPath: apkPath, toPath: apkName)
+        }
+        catch let error as NSError {
+            print("Ooops! Something went wrong with renaming the apk file for the script: \(error)")
+        }
+    }    
 }
