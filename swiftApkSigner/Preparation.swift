@@ -21,7 +21,7 @@ class Preparation{
         return appt
     }
     
-    func filterWithRegex(appt: String) -> (String, String, String, String){
+    func filterWithRegex(appt: String) -> (String, String, String, String?){
         
         let pattern = #"'(.*?)\'|W*(application-debuggable)\W*"#
         let regex = try! NSRegularExpression(pattern: pattern)
@@ -43,17 +43,38 @@ class Preparation{
           }
         }
         
-        let packageName = result[0].reduce("", +)
-        let versionCode = result[1].reduce("", +)
-        let versionName = result[2].reduce("", +)
-        //let compileSdkVersion = result[3].reduce("", +)
-        //let compileSdkVersionCodename = result[4].reduce("", +)
-        let debug = result[5].reduce("", +)
+        print(result)
         
-        return (packageName, versionCode, versionName, debug)
+        if result.contains(["application-debuggable"]) {
+            let packageName = result[0].reduce("", +)
+            print(result[0])
+            print("packageName: ", packageName)
+            let versionCode = result[1].reduce("", +)
+            print(result[1])
+            print("versionCode: ", versionCode)
+            let versionName = result[2].reduce("", +)
+            print("versionName: ", versionName)
+            print(result[2])
+            print(result[5])
+            let debug = result[5].reduce("", +)
+            print("debug", debug)
+            return (packageName, versionCode, versionName, debug)
+        }
+        else{
+            let packageName = result[0].reduce("", +)
+            print(result[0])
+            print("packageName: ", packageName)
+            let versionCode = result[1].reduce("", +)
+            print(result[1])
+            print("versionCode: ", versionCode)
+            let versionName = result[2].reduce("", +)
+            print("versionName: ", versionName)
+            print(result[2])
+            return (packageName, versionCode, versionName, debug)
+        }
     }
     
-    func debugRelease(debugOption: String) -> String {
+    func debugRelease(debugOption: String?) -> String {
         if (debugOption == "application-debuggable"){
             let debugOption = "debug"
             return debugOption
