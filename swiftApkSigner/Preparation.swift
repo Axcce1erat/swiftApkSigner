@@ -42,34 +42,17 @@ class Preparation{
             result.append(groups)
           }
         }
-        
-        print(result)
-        
         if result.contains(["application-debuggable"]) {
             let packageName = result[0].reduce("", +)
-            print(result[0])
-            print("packageName: ", packageName)
             let versionCode = result[1].reduce("", +)
-            print(result[1])
-            print("versionCode: ", versionCode)
             let versionName = result[2].reduce("", +)
-            print("versionName: ", versionName)
-            print(result[2])
-            print(result[5])
             let debug = result[5].reduce("", +)
-            print("debug", debug)
             return (packageName, versionCode, versionName, debug)
         }
         else{
             let packageName = result[0].reduce("", +)
-            print(result[0])
-            print("packageName: ", packageName)
             let versionCode = result[1].reduce("", +)
-            print(result[1])
-            print("versionCode: ", versionCode)
             let versionName = result[2].reduce("", +)
-            print("versionName: ", versionName)
-            print(result[2])
             return (packageName, versionCode, versionName, debug)
         }
     }
