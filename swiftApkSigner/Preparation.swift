@@ -4,10 +4,7 @@ import SwiftShell
 class Preparation{
     
     func dataFromAndroidManifest() -> String{
-//        let urlStartScript = URL(fileURLWithPath: "/Users/axelschwarz/development/swiftApkSigner/swiftApkSigner/readingAndroidManifest.sh")
-//        let stringStartScript = "\(urlStartScript.path)"
-//
-//        let startApk = "appstarter_12.0.0-001_120000000_debug.apk"
+        
         let path = Bundle.main.url(forResource: "readingAndroidManifest", withExtension: "sh")
         let stringStartScript = "\(path!.path)"
         

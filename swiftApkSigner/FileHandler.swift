@@ -15,10 +15,6 @@ public class FileHandler{
         let path = Bundle.main.url(forResource: "apkSignerDtagXcode", withExtension: "sh")
         let pathUrl = "\(path!.path)"
         return pathUrl
-        //        let urlScript = URL(fileURLWithPath: "/Users/axelschwarz/development/swiftApkSigner/swiftApkSigner/apkSignerDtagXcode.sh")
-        //        let stringScript = "\(urlScript.path)"
-        //        print("\n\nTestingPath:\(stringScript)\n\n")
-        //        return stringScript
     }
 
     func createJsonString (PackageName: String) -> String? {
