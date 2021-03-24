@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		654F39D22602640300F4C726 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = 654F39D12602640300F4C726 /* config.json */; };
 		655643E425F2414700878AD9 /* swiftApkSignerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655643E325F2414700878AD9 /* swiftApkSignerTest.swift */; };
+		655D73CD260A2BC600D67828 /* apkSignerDtagXcode.sh in Sources */ = {isa = PBXBuildFile; fileRef = 656AF5F52603989D001477D3 /* apkSignerDtagXcode.sh */; };
+		655D73D0260A2BCC00D67828 /* readingAndroidManifest.sh in Sources */ = {isa = PBXBuildFile; fileRef = 656AF5F62603989D001477D3 /* readingAndroidManifest.sh */; };
 		656AF5F72603989D001477D3 /* apkSignerDtagXcode.sh in Resources */ = {isa = PBXBuildFile; fileRef = 656AF5F52603989D001477D3 /* apkSignerDtagXcode.sh */; };
 		656AF5F82603989D001477D3 /* readingAndroidManifest.sh in Resources */ = {isa = PBXBuildFile; fileRef = 656AF5F62603989D001477D3 /* readingAndroidManifest.sh */; };
 		656B24A025F913F800685CB5 /* Preparation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656B249F25F913F800685CB5 /* Preparation.swift */; };
@@ -25,8 +27,8 @@
 		65EDFB7425E3CFC4006D10D5 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			dstPath = usr/share/man/man1;
+			dstSubfolderSpec = 16;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 1;
@@ -234,6 +236,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				655D73D0260A2BCC00D67828 /* readingAndroidManifest.sh in Sources */,
+				655D73CD260A2BC600D67828 /* apkSignerDtagXcode.sh in Sources */,
 				656B24A025F913F800685CB5 /* Preparation.swift in Sources */,
 				656B24A825F92A1400685CB5 /* FileHandler.swift in Sources */,
 				65EDFB7A25E3CFC4006D10D5 /* main.swift in Sources */,
@@ -420,6 +424,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VZVFUQTSQC;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};

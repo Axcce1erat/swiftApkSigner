@@ -9,9 +9,25 @@ let (packageName, versionCode, versionName, debug) = Preparation().filterWithReg
 
 let debugOption = Preparation().debugRelease(debugOption: debug)
 
+FileHandler().createAssetsDir()
+FileHandler().createConfigDir()
+
 let checkJsonResult: String = FileHandler().checkJson()
 
-if let newJsonData = FileHandler().handleJsonData(jsonPath: checkJsonResult){
+let jsonFileAt = FileHandler().getScriptDirectory().appendingPathComponent("\(packageName)_Config.json")
+let jsonFileTo = FileHandler().getScriptDirectory().appendingPathComponent("configs/\(packageName)_Config.json")
+let jsonFileToStrig = "\(jsonFileTo.path)"
+
+let fileManager = FileManager.default
+
+do {
+    try fileManager.moveItem(at: jsonFileAt, to: jsonFileTo)
+}
+catch let error as NSError {
+    print("Ooops! Something went wrong with cut and copy the Config.json results: \(error)")
+}
+
+if let newJsonData = FileHandler().handleJsonData(jsonPath: jsonFileToStrig){
     
     let apkName = "\(newJsonData.AppName)_\(versionName)_\(versionCode)_\(debugOption).apk"
 
