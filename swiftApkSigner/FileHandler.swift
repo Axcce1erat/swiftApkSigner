@@ -7,16 +7,17 @@ public class FileHandler{
     
       
     func getScriptDirectory() -> URL {
-        let currentDirectoryURL = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
+        let programPath = Bundle.main.bundlePath
+        let currentDirectoryURL = URL(fileURLWithPath: programPath)
         print(currentDirectoryURL)
         return currentDirectoryURL
     }
     
-    func dataFromSingingScript () -> String{
-        //let path = Bundle.main.url(forResource: "apkSignerDtagXcode", withExtension: "sh")
+    func dataFromSingingScript () -> String?{
+        let pathUrl = Bundle.main.path(forResource: "scripts/apkSignerDtagXcode", ofType: ".sh")
         //let path = URL(fileReferenceLiteralResourceName: "apkSignerDtagXcode.sh")
-        let path = URL(fileURLWithPath: "/Users/axelschwarz/development/swiftApkSigner/swiftApkSigner/apkSignerDtagXcode.sh")
-        let pathUrl = "\(path.path)"
+        //let path = URL(fileURLWithPath: "/Users/axelschwarz/development/swiftApkSigner/swiftApkSigner/apkSignerDtagXcode.sh")
+        //let pathUrl = "\(path!.path)"
         return pathUrl
     }
 
@@ -68,14 +69,15 @@ public class FileHandler{
         }
     }
 
-public struct Config : Codable{
+public struct Config : Codable {
 
         var PackageName: String
-        var AppName: String
-        var AppPath: String
-        var KeyStore: String
-        var KeyPass: String
+        var AppName: String?
+        var AppPath: String?
+        var KeyStore: String?
+        var KeyPass: String?
         var SigningScheme: Int
+    
     }
 
     func handleJsonData(jsonPath: String) -> Config? {
@@ -112,9 +114,6 @@ public struct Config : Codable{
     func checkJson() -> String! {
         let check = searchInDir()
         let checkConfigsDir = searchInConfigsDir()
-        print("check: ", check)
-        print("checkConfigsDir: ", checkConfigsDir)
-        print(check || checkConfigsDir)
         
         if ((check || checkConfigsDir) == false){
             FileHandler().writingStartJson(PackageName: packageName)

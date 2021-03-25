@@ -1,6 +1,7 @@
 //  Created by Axel Schwarz
 import Foundation
 import AppKit
+import Darwin
 import SwiftShell
 
 let appt = Preparation().dataFromAndroidManifest()
@@ -29,17 +30,30 @@ catch let error as NSError {
 
 if let newJsonData = FileHandler().handleJsonData(jsonPath: jsonFileToStrig){
     
-    let apkName = "\(newJsonData.AppName)_\(versionName)_\(versionCode)_\(debugOption).apk"
+    if (newJsonData.AppName == nil || newJsonData.AppPath == nil || newJsonData.KeyPass == nil || newJsonData.KeyStore == nil)  {
+        print("Fill in Config.json AppName / AppPath / KeyPass / KeyStore ")
+        // Verschieben config.json aus dem config dir ins exec dir
+        exit(0)
+    }
+    else if (newJsonData.SigningScheme == 0 || newJsonData.SigningScheme > 4) {
+        print("SigningScheme has to be 1-4")
+        // Verschieben config.json aus dem config dir ins exec dir
+        exit(0)
+    }
+    
+    let apkName = "\(newJsonData.AppName!)_\(versionName)_\(versionCode)_\(debugOption).apk"
 
     FileHandler().reNameApkFile(apkName: apkName)
 
     let stringScript = FileHandler().dataFromSingingScript()
     let stringSigningScheme: String = String(newJsonData.SigningScheme)
+
+    // check auf assets dir for files
     
-    let apkSignerDtagXcode = run(stringScript, "assets/\(newJsonData.KeyStore)", "assets/\(newJsonData.KeyPass)", stringSigningScheme, apkName).stdout
+    let apkSignerDtagXcode = run(stringScript!, "assets/\(newJsonData.KeyStore!)", "assets/\(newJsonData.KeyPass!)", stringSigningScheme, apkName).stdout
     print(apkSignerDtagXcode)
     
-    let apkParameter = FileHandler().getScriptDirectory().appendingPathComponent("\(newJsonData.AppName)_\(versionName)_\(versionCode)_\(debugOption)_log.txt")
+    let apkParameter = FileHandler().getScriptDirectory().appendingPathComponent("\(newJsonData.AppName!)_\(versionName)_\(versionCode)_\(debugOption)_log.txt")
 
     do {
         try apkSignerDtagXcode.write(to: apkParameter, atomically: true, encoding: String.Encoding.utf8)
@@ -47,16 +61,16 @@ if let newJsonData = FileHandler().handleJsonData(jsonPath: jsonFileToStrig){
         print ("failed to write file – bad permissions, bad filename, missing permissions, or more likely it can't be converted to the encoding")
     }
     
-    let apkNameWithoutIndex = "\(newJsonData.AppName)_\(versionName)_\(versionCode)_\(debugOption)"
-    let apkParameterName = "\(newJsonData.AppName)_\(versionName)_\(versionCode)_\(debugOption)_log.txt"
+    let apkNameWithoutIndex = "\(newJsonData.AppName!)_\(versionName)_\(versionCode)_\(debugOption)"
+    let apkParameterName = "\(newJsonData.AppName!)_\(versionName)_\(versionCode)_\(debugOption)_log.txt"
     
     func handelSubDir() -> String{
         if(newJsonData.AppName == newJsonData.AppPath){
-            let appNameDir = newJsonData.AppName
+            let appNameDir = newJsonData.AppName!
             return appNameDir
         }
         else{
-            let appNameDir = newJsonData.AppPath
+            let appNameDir = newJsonData.AppPath!
             return appNameDir
         }
     }
@@ -92,4 +106,7 @@ if let newJsonData = FileHandler().handleJsonData(jsonPath: jsonFileToStrig){
     catch let error as NSError {
         print("Ooops! Something went wrong with cut and copy the singing results: \(error)")
     }
+}
+else{
+    
 }
