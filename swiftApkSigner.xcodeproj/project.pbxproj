@@ -36,6 +36,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		654C0626260E2FE5002BA664 /* assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = assets.xcassets; sourceTree = "<group>"; };
 		654F39D12602640300F4C726 /* config.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
 		655643E125F2414700878AD9 /* swiftApkSignerTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = swiftApkSignerTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		655643E325F2414700878AD9 /* swiftApkSignerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swiftApkSignerTest.swift; sourceTree = "<group>"; };
@@ -92,6 +93,7 @@
 				65EDFB7825E3CFC4006D10D5 /* swiftApkSigner */,
 				655643E225F2414700878AD9 /* swiftApkSignerTest */,
 				65EDFB7725E3CFC4006D10D5 /* Products */,
+				654C0626260E2FE5002BA664 /* assets.xcassets */,
 				CB98FD132600FBCC00A9EE2E /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -411,6 +413,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VZVFUQTSQC;
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -423,6 +426,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VZVFUQTSQC;
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";

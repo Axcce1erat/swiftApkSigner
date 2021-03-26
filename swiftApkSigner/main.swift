@@ -30,14 +30,34 @@ catch let error as NSError {
 
 if let newJsonData = FileHandler().handleJsonData(jsonPath: jsonFileToStrig){
     
-    if (newJsonData.AppName == nil || newJsonData.AppPath == nil || newJsonData.KeyPass == nil || newJsonData.KeyStore == nil)  {
+    if (newJsonData.AppName == "" || newJsonData.AppPath == "" || newJsonData.KeyPass == "" || newJsonData.KeyStore == "")  {
         print("Fill in Config.json AppName / AppPath / KeyPass / KeyStore ")
-        // Verschieben config.json aus dem config dir ins exec dir
+        
+        let jsonFileAt = FileHandler().getScriptDirectory().appendingPathComponent("\(packageName)_Config.json")
+        let jsonFileTo = FileHandler().getScriptDirectory().appendingPathComponent("configs/\(packageName)_Config.json")
+        let fileManager = FileManager.default
+
+        do {
+            try fileManager.moveItem(at: jsonFileTo, to: jsonFileAt)
+        }
+        catch let error as NSError {
+            print("Ooops! Something went wrong with cut and copy the Config.json results: \(error)")
+        }
         exit(0)
     }
     else if (newJsonData.SigningScheme == 0 || newJsonData.SigningScheme > 4) {
         print("SigningScheme has to be 1-4")
-        // Verschieben config.json aus dem config dir ins exec dir
+        
+        let jsonFileAt = FileHandler().getScriptDirectory().appendingPathComponent("\(packageName)_Config.json")
+        let jsonFileTo = FileHandler().getScriptDirectory().appendingPathComponent("configs/\(packageName)_Config.json")
+        let fileManager = FileManager.default
+
+        do {
+            try fileManager.moveItem(at: jsonFileTo, to: jsonFileAt)
+        }
+        catch let error as NSError {
+            print("Ooops! Something went wrong with cut and copy the Config.json results: \(error)")
+        }
         exit(0)
     }
     
@@ -48,9 +68,47 @@ if let newJsonData = FileHandler().handleJsonData(jsonPath: jsonFileToStrig){
     let stringScript = FileHandler().dataFromSingingScript()
     let stringSigningScheme: String = String(newJsonData.SigningScheme)
 
-    // check auf assets dir for files
     
-    let apkSignerDtagXcode = run(stringScript!, "assets/\(newJsonData.KeyStore!)", "assets/\(newJsonData.KeyPass!)", stringSigningScheme, apkName).stdout
+    func checkForAssetsKeystore() -> String {
+        if FileManager.default.fileExists(atPath: "assets/\(newJsonData.KeyStore!)"){
+            let keystoreAssetsDir = "assets/\(newJsonData.KeyStore!)"
+            return keystoreAssetsDir
+        }
+        print("Missing .keystore file in assets Directory")
+        
+        let jsonFileAt = FileHandler().getScriptDirectory().appendingPathComponent("\(packageName)_Config.json")
+        let jsonFileTo = FileHandler().getScriptDirectory().appendingPathComponent("configs/\(packageName)_Config.json")
+        let fileManager = FileManager.default
+
+        do {
+            try fileManager.moveItem(at: jsonFileTo, to: jsonFileAt)
+        }
+        catch let error as NSError {
+            print("Ooops! Something went wrong with cut and copy the Config.json results: \(error)")
+        }
+        exit(0)
+    }
+    func checkForAssetsPass() -> String {
+        if FileManager.default.fileExists(atPath: "assets/\(newJsonData.KeyPass!)"){
+            let keyPassAssetsDir = "assets/\(newJsonData.KeyPass!)"
+            return keyPassAssetsDir
+        }
+        print("Missing keypass.txt file in assets Directory")
+        
+        let jsonFileAt = FileHandler().getScriptDirectory().appendingPathComponent("\(packageName)_Config.json")
+        let jsonFileTo = FileHandler().getScriptDirectory().appendingPathComponent("configs/\(packageName)_Config.json")
+        let fileManager = FileManager.default
+
+        do {
+            try fileManager.moveItem(at: jsonFileTo, to: jsonFileAt)
+        }
+        catch let error as NSError {
+            print("Ooops! Something went wrong with cut and copy the Config.json results: \(error)")
+        }
+        exit(0)
+    }
+    
+    let apkSignerDtagXcode = run(stringScript!, checkForAssetsKeystore(), checkForAssetsPass() , stringSigningScheme, apkName).stdout
     print(apkSignerDtagXcode)
     
     let apkParameter = FileHandler().getScriptDirectory().appendingPathComponent("\(newJsonData.AppName!)_\(versionName)_\(versionCode)_\(debugOption)_log.txt")
@@ -78,6 +136,7 @@ if let newJsonData = FileHandler().handleJsonData(jsonPath: jsonFileToStrig){
     let apkNameURL: URL = FileHandler().getScriptDirectory().appendingPathComponent(apkName)
     let apkNameAlinged: URL = FileHandler().getScriptDirectory().appendingPathComponent("\(apkNameWithoutIndex)_aligned.apk")
     let apkNameAlingedSigned: URL = FileHandler().getScriptDirectory().appendingPathComponent("\(apkNameWithoutIndex)_aligned_signed.apk")
+    let idsigName: URL = FileHandler().getScriptDirectory().appendingPathComponent("\(apkNameWithoutIndex)_aligned_signed.apk.idsig")
     let apkParameterToString: URL = apkParameter
     
     let destionationPath = "signedApks/\(handelSubDir())/\(versionName)/\(debugOption)"
@@ -87,6 +146,7 @@ if let newJsonData = FileHandler().handleJsonData(jsonPath: jsonFileToStrig){
     let apkNameAlingedDes: URL = FileHandler().getScriptDirectory().appendingPathComponent("\(destionationPath)/\(apkNameWithoutIndex)_aligned.apk")
     let apkNameAlingedSignedDes: URL = FileHandler().getScriptDirectory().appendingPathComponent("\(destionationPath)/\(apkNameWithoutIndex)_aligned_signed.apk")
     let apkParameterToStringDes: URL = FileHandler().getScriptDirectory().appendingPathComponent("\(destionationPath)/\(apkParameterName)")
+    let idsigNameDes: URL = FileHandler().getScriptDirectory().appendingPathComponent("\(destionationPath)/\(apkNameWithoutIndex)_aligned_signed.apk.idsig")
       
     let fileManager = FileManager.default
     
@@ -102,11 +162,14 @@ if let newJsonData = FileHandler().handleJsonData(jsonPath: jsonFileToStrig){
         try fileManager.moveItem(at: apkNameAlinged, to: apkNameAlingedDes)
         try fileManager.moveItem(at: apkNameAlingedSigned, to: apkNameAlingedSignedDes)
         try fileManager.moveItem(at: apkParameterToString, to: apkParameterToStringDes)
+        if newJsonData.SigningScheme == 4{
+            try fileManager.moveItem(at: idsigName, to: idsigNameDes)
+        }
     }
     catch let error as NSError {
         print("Ooops! Something went wrong with cut and copy the singing results: \(error)")
     }
 }
 else{
-    
+    print("The developer made a big mistake with the json file!!!")
 }

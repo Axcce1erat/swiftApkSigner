@@ -9,7 +9,6 @@ public class FileHandler{
     func getScriptDirectory() -> URL {
         let programPath = Bundle.main.bundlePath
         let currentDirectoryURL = URL(fileURLWithPath: programPath)
-        print(currentDirectoryURL)
         return currentDirectoryURL
     }
     
@@ -161,7 +160,6 @@ public struct Config : Codable {
         else {
             fatalError("apk not found")
         }
-       
         let fileManager = FileManager.default
 
         do {

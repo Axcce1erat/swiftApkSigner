@@ -6,7 +6,6 @@ class Preparation{
     func dataFromAndroidManifest() -> String{
         
         let stringStartScript = Bundle.main.path(forResource: "scripts/readingAndroidManifest", ofType: ".sh")
-        print(stringStartScript)
         //let path = URL(fileReferenceLiteralResourceName: "readingAndroidManifest.sh")
         //let path = URL(fileURLWithPath: "/Users/axelschwarz/development/swiftApkSigner/swiftApkSigner/readingAndroidManifest.sh")
         //let stringStartScript = "\(path!.path)"
