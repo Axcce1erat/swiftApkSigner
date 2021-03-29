@@ -4,9 +4,11 @@ import Darwin
 import AppKit
 
 public class FileHandler{
-    
-      
+
     func getScriptDirectory() -> URL {
+        if let myPath = ProcessInfo().arguments.first {
+            print ("Hurray, we live at \(myPath)")
+        }
         let programPath = Bundle.main.bundlePath
         let currentDirectoryURL = URL(fileURLWithPath: programPath)
         return currentDirectoryURL
