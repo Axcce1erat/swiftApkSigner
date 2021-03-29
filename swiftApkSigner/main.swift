@@ -40,8 +40,7 @@ if let newJsonData = FileHandler().handleJsonData(jsonPath: jsonFileToStrig){
         do {
             try fileManager.moveItem(at: jsonFileTo, to: jsonFileAt)
         }
-        catch let error as NSError {
-            print("Ooops! Something went wrong with cut and copy the Config.json results: \(error)")
+        catch _ as NSError {
         }
         exit(0)
     }
@@ -55,8 +54,7 @@ if let newJsonData = FileHandler().handleJsonData(jsonPath: jsonFileToStrig){
         do {
             try fileManager.moveItem(at: jsonFileTo, to: jsonFileAt)
         }
-        catch let error as NSError {
-            print("Ooops! Something went wrong with cut and copy the Config.json results: \(error)")
+        catch _ as NSError {
         }
         exit(0)
     }
@@ -83,8 +81,7 @@ if let newJsonData = FileHandler().handleJsonData(jsonPath: jsonFileToStrig){
         do {
             try fileManager.moveItem(at: jsonFileTo, to: jsonFileAt)
         }
-        catch let error as NSError {
-            print("Ooops! Something went wrong with cut and copy the Config.json results: \(error)")
+        catch _ as NSError {
         }
         exit(0)
     }
@@ -102,8 +99,7 @@ if let newJsonData = FileHandler().handleJsonData(jsonPath: jsonFileToStrig){
         do {
             try fileManager.moveItem(at: jsonFileTo, to: jsonFileAt)
         }
-        catch let error as NSError {
-            print("Ooops! Something went wrong with cut and copy the Config.json results: \(error)")
+        catch _ as NSError {
         }
         exit(0)
     }
@@ -139,7 +135,7 @@ if let newJsonData = FileHandler().handleJsonData(jsonPath: jsonFileToStrig){
     let idsigName: URL = FileHandler().getScriptDirectory().appendingPathComponent("\(apkNameWithoutIndex)_aligned_signed.apk.idsig")
     let apkParameterToString: URL = apkParameter
     
-    let destionationPath = "signedApks/\(handelSubDir())/\(versionName)/\(debugOption)"
+    let destionationPath = "signedAPKs/\(handelSubDir())/\(versionName)/\(debugOption)"
     let scriptURLDestionation = FileHandler().getScriptDirectory().appendingPathComponent(destionationPath)
     
     let apkNameUrlDes: URL = FileHandler().getScriptDirectory().appendingPathComponent("\(destionationPath)/\(apkName)")
