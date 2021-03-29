@@ -7,8 +7,13 @@ public class FileHandler{
     
       
     func getScriptDirectory() -> URL {
+        if let myPath = ProcessInfo().arguments.first {
+                    print ("myPath: \(myPath)")
+                }
         let programPath = Bundle.main.bundlePath
+        //print ("programPath: \(programPath)")
         let currentDirectoryURL = URL(fileURLWithPath: programPath)
+        //print ("currentDirectoryURL: \(currentDirectoryURL)")
         return currentDirectoryURL
     }
     

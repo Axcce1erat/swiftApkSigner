@@ -9,12 +9,10 @@
 /* Begin PBXBuildFile section */
 		654F39D22602640300F4C726 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = 654F39D12602640300F4C726 /* config.json */; };
 		655643E425F2414700878AD9 /* swiftApkSignerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655643E325F2414700878AD9 /* swiftApkSignerTest.swift */; };
+		65635B802611FA9E00F1015E /* readingAndroidManifest.sh in Resources */ = {isa = PBXBuildFile; fileRef = 65635B7E2611FA9E00F1015E /* readingAndroidManifest.sh */; };
+		65635B812611FA9E00F1015E /* apkSignerDtagXcode.sh in Resources */ = {isa = PBXBuildFile; fileRef = 65635B7F2611FA9E00F1015E /* apkSignerDtagXcode.sh */; };
 		656B24A025F913F800685CB5 /* Preparation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656B249F25F913F800685CB5 /* Preparation.swift */; };
 		656B24A825F92A1400685CB5 /* FileHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656B24A725F92A1400685CB5 /* FileHandler.swift */; };
-		6570669E260CDDEE005DE449 /* apkSignerDtagXcode.sh in Resources */ = {isa = PBXBuildFile; fileRef = 6570669C260CDDEE005DE449 /* apkSignerDtagXcode.sh */; };
-		6570669F260CDDEE005DE449 /* readingAndroidManifest.sh in Resources */ = {isa = PBXBuildFile; fileRef = 6570669D260CDDEE005DE449 /* readingAndroidManifest.sh */; };
-		657066A4260CDDF5005DE449 /* apkSignerDtagXcode.sh in Sources */ = {isa = PBXBuildFile; fileRef = 6570669C260CDDEE005DE449 /* apkSignerDtagXcode.sh */; };
-		657066A7260CDDFC005DE449 /* readingAndroidManifest.sh in Sources */ = {isa = PBXBuildFile; fileRef = 6570669D260CDDEE005DE449 /* readingAndroidManifest.sh */; };
 		65EDFB7A25E3CFC4006D10D5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EDFB7925E3CFC4006D10D5 /* main.swift */; };
 		65EDFB8725E3DDDC006D10D5 /* SwiftShell in Frameworks */ = {isa = PBXBuildFile; productRef = 65EDFB8625E3DDDC006D10D5 /* SwiftShell */; };
 		CB98FCF92600FB3500A9EE2E /* FileHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656B24A725F92A1400685CB5 /* FileHandler.swift */; };
@@ -41,10 +39,11 @@
 		655643E125F2414700878AD9 /* swiftApkSignerTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = swiftApkSignerTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		655643E325F2414700878AD9 /* swiftApkSignerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swiftApkSignerTest.swift; sourceTree = "<group>"; };
 		655643E525F2414700878AD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		65635B772611F86500F1015E /* swiftApkSignerRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = swiftApkSignerRelease.entitlements; sourceTree = "<group>"; };
+		65635B7E2611FA9E00F1015E /* readingAndroidManifest.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = readingAndroidManifest.sh; path = ../../../Desktop/scripts/readingAndroidManifest.sh; sourceTree = "<group>"; };
+		65635B7F2611FA9E00F1015E /* apkSignerDtagXcode.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = apkSignerDtagXcode.sh; path = ../../../Desktop/scripts/apkSignerDtagXcode.sh; sourceTree = "<group>"; };
 		656B249F25F913F800685CB5 /* Preparation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preparation.swift; sourceTree = "<group>"; };
 		656B24A725F92A1400685CB5 /* FileHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHandler.swift; sourceTree = "<group>"; };
-		6570669C260CDDEE005DE449 /* apkSignerDtagXcode.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = apkSignerDtagXcode.sh; path = ../../../Desktop/save_scripts/apkSignerDtagXcode.sh; sourceTree = "<group>"; };
-		6570669D260CDDEE005DE449 /* readingAndroidManifest.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = readingAndroidManifest.sh; path = ../../../Desktop/save_scripts/readingAndroidManifest.sh; sourceTree = "<group>"; };
 		65EDFB7625E3CFC4006D10D5 /* swiftApkSigner */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = swiftApkSigner; sourceTree = BUILT_PRODUCTS_DIR; };
 		65EDFB7925E3CFC4006D10D5 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -110,11 +109,12 @@
 		65EDFB7825E3CFC4006D10D5 /* swiftApkSigner */ = {
 			isa = PBXGroup;
 			children = (
+				65635B772611F86500F1015E /* swiftApkSignerRelease.entitlements */,
 				65EDFB7925E3CFC4006D10D5 /* main.swift */,
 				656B24A725F92A1400685CB5 /* FileHandler.swift */,
 				656B249F25F913F800685CB5 /* Preparation.swift */,
-				6570669C260CDDEE005DE449 /* apkSignerDtagXcode.sh */,
-				6570669D260CDDEE005DE449 /* readingAndroidManifest.sh */,
+				65635B7F2611FA9E00F1015E /* apkSignerDtagXcode.sh */,
+				65635B7E2611FA9E00F1015E /* readingAndroidManifest.sh */,
 			);
 			path = swiftApkSigner;
 			sourceTree = "<group>";
@@ -176,6 +176,9 @@
 		65EDFB6E25E3CFC4006D10D5 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					New,
+				);
 				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
@@ -214,9 +217,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6570669F260CDDEE005DE449 /* readingAndroidManifest.sh in Resources */,
+				65635B802611FA9E00F1015E /* readingAndroidManifest.sh in Resources */,
 				654F39D22602640300F4C726 /* config.json in Resources */,
-				6570669E260CDDEE005DE449 /* apkSignerDtagXcode.sh in Resources */,
+				65635B812611FA9E00F1015E /* apkSignerDtagXcode.sh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,8 +241,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				657066A7260CDDFC005DE449 /* readingAndroidManifest.sh in Sources */,
-				657066A4260CDDF5005DE449 /* apkSignerDtagXcode.sh in Sources */,
 				656B24A025F913F800685CB5 /* Preparation.swift in Sources */,
 				656B24A825F92A1400685CB5 /* FileHandler.swift in Sources */,
 				65EDFB7A25E3CFC4006D10D5 /* main.swift in Sources */,
@@ -277,6 +278,7 @@
 		655643E825F2414700878AD9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = VZVFUQTSQC;
@@ -415,6 +417,7 @@
 				DEVELOPMENT_TEAM = VZVFUQTSQC;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/swiftApkSignerTest/Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -423,11 +426,13 @@
 		65EDFB7F25E3CFC4006D10D5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = swiftApkSigner/swiftApkSignerRelease.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VZVFUQTSQC;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/swiftApkSignerTest/Info.plist";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
