@@ -4,17 +4,21 @@ import Darwin
 import AppKit
 
 public class FileHandler{
-    
-      
+          
     func getScriptDirectory() -> URL {
+        
         if let myPath = ProcessInfo().arguments.first {
-                    print ("myPath: \(myPath)")
+            let currentDirectoryURL = URL(fileURLWithPath: myPath, isDirectory: true).deletingLastPathComponent()
+                    //print ("myPath: \(myPathUrl)")
+                    return currentDirectoryURL
                 }
-        let programPath = Bundle.main.bundlePath
-        //print ("programPath: \(programPath)")
-        let currentDirectoryURL = URL(fileURLWithPath: programPath)
-        //print ("currentDirectoryURL: \(currentDirectoryURL)")
-        return currentDirectoryURL
+        
+//        let programPath = Bundle.main.bundlePath
+//        print ("programPath: \(programPath)")
+//        let currentDirectoryURL = URL(fileURLWithPath: programPath)
+//        print ("currentDirectoryURL: \(currentDirectoryURL)")
+//        return currentDirectoryURL
+        exit(0)
     }
     
     func dataFromSingingScript () -> String?{
